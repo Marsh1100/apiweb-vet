@@ -137,6 +137,12 @@ public class UserService : IUserService
 
                 if (userHasRole == false)
                 {
+                    var withoutRole = user.Roles.FirstOrDefault(u => u.Name == Authorization.Roles.WithoutRol.ToString());
+                    if (withoutRole != null && model.Role.ToLower() != Authorization.Roles.WithoutRol.ToString().ToLower())
+                    {
+                        user.Roles.Remove(withoutRole);
+                    }
+                    
                     user.Roles.Add(rolExists);
                     _unitOfWork.Users.Update(user);
                     await _unitOfWork.SaveAsync();
