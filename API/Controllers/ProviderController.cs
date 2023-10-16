@@ -38,9 +38,9 @@ public class ProviderController : ApiBaseController
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Provider>> Post([FromBody] ProviderDto ProviderDto)
+    public async Task<ActionResult<Provider>> Post([FromBody] ProviderDto providerDto)
     {
-        var provider = _mapper.Map<Provider>(ProviderDto);
+        var provider = _mapper.Map<Provider>(providerDto);
         this._unitOfWork.Providers.Add(provider);
         await _unitOfWork.SaveAsync();
 

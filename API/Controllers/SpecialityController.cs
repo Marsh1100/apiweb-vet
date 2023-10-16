@@ -38,9 +38,9 @@ public class SpecialityController : ApiBaseController
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Speciality>> Post([FromBody] SpecialityDto SpecialityDto)
+    public async Task<ActionResult<Speciality>> Post([FromBody] SpecialityDto specialityDto)
     {
-        var specialities = _mapper.Map<Speciality>(SpecialityDto);
+        var specialities = _mapper.Map<Speciality>(specialityDto);
         this._unitOfWork.Specialities.Add(specialities);
         await _unitOfWork.SaveAsync();
 
@@ -57,10 +57,10 @@ public class SpecialityController : ApiBaseController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<Speciality>> put(SpecialityDto SpecialityDto)
+    public async Task<ActionResult<Speciality>> put(SpecialityDto specialityDto)
     {
-        if(SpecialityDto == null){ return NotFound(); }
-        var specialities = this._mapper.Map<Speciality>(SpecialityDto);
+        if(specialityDto == null){ return NotFound(); }
+        var specialities = this._mapper.Map<Speciality>(specialityDto);
         this._unitOfWork.Specialities.Update(specialities);
         Console.WriteLine(await this._unitOfWork.SaveAsync());
 

@@ -38,9 +38,9 @@ public class SpeciesController : ApiBaseController
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Species>> Post([FromBody] SpeciesDto SpeciesDto)
+    public async Task<ActionResult<Species>> Post([FromBody] SpeciesDto speciesDto)
     {
-        var species = _mapper.Map<Species>(SpeciesDto);
+        var species = _mapper.Map<Species>(speciesDto);
         this._unitOfWork.SpeciesP.Add(species);
         await _unitOfWork.SaveAsync();
 
@@ -57,10 +57,10 @@ public class SpeciesController : ApiBaseController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<Species>> put(SpeciesDto SpeciesDto)
+    public async Task<ActionResult<Species>> put(SpeciesDto speciesDto)
     {
-        if(SpeciesDto == null){ return NotFound(); }
-        var species = this._mapper.Map<Species>(SpeciesDto);
+        if(speciesDto == null){ return NotFound(); }
+        var species = this._mapper.Map<Species>(speciesDto);
         this._unitOfWork.SpeciesP.Update(species);
         Console.WriteLine(await this._unitOfWork.SaveAsync());
 

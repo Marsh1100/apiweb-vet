@@ -11,6 +11,7 @@ public interface IUnitOfWork
     IUserRepository Users { get; }
     IAppoiment Appoiments { get; }
     IBreed Breeds { get; }
+    IPet Pets { get; }
     ILaboratory Laboratories { get; }
     IMedicine Medicines { get; }
     IMovementMedicine MovementMedicines { get; }

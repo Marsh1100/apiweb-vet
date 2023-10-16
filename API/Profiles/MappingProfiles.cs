@@ -30,7 +30,18 @@ public class MappingProfiles : Profile
             .ReverseMap();
         CreateMap<Species,SpeciesDto>()
             .ReverseMap();
-         CreateMap<MovementType,MovementTypeDto>()
+        CreateMap<MovementType,MovementTypeDto>()
+            .ReverseMap();
+
+        CreateMap<Appoiment,AppoimentDto>()
+            .ReverseMap();
+        CreateMap<Vet, VetDto>()
+            .ReverseMap();
+        CreateMap<Pet, PetDto>()
+            .ReverseMap();
+        CreateMap<Medicine, MedicineDto>()
+            .ReverseMap();
+        CreateMap<MovementMedicine, MovementMedicineDto>()
             .ReverseMap();
     }   
 }

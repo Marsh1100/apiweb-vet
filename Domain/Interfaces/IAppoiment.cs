@@ -8,5 +8,5 @@ namespace Domain.Interfaces;
 
 public interface IAppoiment : IGenericRepository<Appoiment> 
 {
-    
+    Task<string> RegisterAsync(Appoiment modelAppoiment);
 }

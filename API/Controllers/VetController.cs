@@ -12,12 +12,12 @@ namespace API.Controllers;
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
 
-public class ReasonController : ApiBaseController
+public class VetController : ApiBaseController
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public ReasonController(IUnitOfWork unitOfWork, IMapper mapper)
+    public VetController(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -28,28 +28,28 @@ public class ReasonController : ApiBaseController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<IEnumerable<ReasonDto>>> Get()
+    public async Task<ActionResult<IEnumerable<VetDto>>> Get()
     {
-        var reasons = await _unitOfWork.Reasons.GetAllAsync();
-        return _mapper.Map<List<ReasonDto>>(reasons);
+        var vets = await _unitOfWork.Veterinarians.GetAllAsync();
+        return _mapper.Map<List<VetDto>>(vets);
     }
 
     [HttpPost()]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Reason>> Post([FromBody] ReasonDto reasonDto)
+    public async Task<ActionResult<Vet>> Post([FromBody] VetDto vetDto)
     {
-        var reason = _mapper.Map<Reason>(reasonDto);
-        this._unitOfWork.Reasons.Add(reason);
+        var vet = _mapper.Map<Vet>(vetDto);
+        this._unitOfWork.Veterinarians.Add(vet);
         await _unitOfWork.SaveAsync();
 
-        if(reason == null)
+        if(vet == null)
         {
             return BadRequest();
         }
 
-        return CreatedAtAction(nameof(Post), new{id=reason.Id}, reason);
+        return CreatedAtAction(nameof(Post), new{id=vet.Id}, vet);
     }
 
     [HttpPut()]
@@ -57,14 +57,14 @@ public class ReasonController : ApiBaseController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<Reason>> put(ReasonDto reasonDto)
+    public async Task<ActionResult<Vet>> put(VetDto vetDto)
     {
-        if(reasonDto == null){ return NotFound(); }
-        var reason = this._mapper.Map<Reason>(reasonDto);
-        this._unitOfWork.Reasons.Update(reason);
+        if(vetDto == null){ return NotFound(); }
+        var vet = this._mapper.Map<Vet>(vetDto);
+        this._unitOfWork.Veterinarians.Update(vet);
         Console.WriteLine(await this._unitOfWork.SaveAsync());
 
-        return reason;
+        return vet;
     }
 
     [HttpDelete("{id}")]
@@ -74,12 +74,12 @@ public class ReasonController : ApiBaseController
 
     public async Task<IActionResult> Delete(int id)
     {
-        var reason = await _unitOfWork.Reasons.GetByIdAsync(id);
-        if(reason == null)
+        var vet = await _unitOfWork.Veterinarians.GetByIdAsync(id);
+        if(vet == null)
         {
             return NotFound();
         }
-        this._unitOfWork.Reasons.Remove(reason);
+        this._unitOfWork.Veterinarians.Remove(vet);
         await this._unitOfWork.SaveAsync();
         return NoContent();
     }

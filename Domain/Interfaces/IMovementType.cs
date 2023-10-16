@@ -8,5 +8,5 @@ namespace Domain.Interfaces;
 
 public interface IMovementType : IGenericRepository<MovementType> 
 {
-    
+
 }

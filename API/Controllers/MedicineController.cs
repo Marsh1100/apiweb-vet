@@ -12,12 +12,12 @@ namespace API.Controllers;
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
 
-public class ReasonController : ApiBaseController
+public class MedicineController : ApiBaseController
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public ReasonController(IUnitOfWork unitOfWork, IMapper mapper)
+    public MedicineController(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -28,28 +28,28 @@ public class ReasonController : ApiBaseController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<IEnumerable<ReasonDto>>> Get()
+    public async Task<ActionResult<IEnumerable<MedicineDto>>> Get()
     {
-        var reasons = await _unitOfWork.Reasons.GetAllAsync();
-        return _mapper.Map<List<ReasonDto>>(reasons);
+        var medicines = await _unitOfWork.Medicines.GetAllAsync();
+        return _mapper.Map<List<MedicineDto>>(medicines);
     }
 
     [HttpPost()]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Reason>> Post([FromBody] ReasonDto reasonDto)
+    public async Task<ActionResult<Medicine>> Post([FromBody] MedicineDto medicineDto)
     {
-        var reason = _mapper.Map<Reason>(reasonDto);
-        this._unitOfWork.Reasons.Add(reason);
+        var medicine = _mapper.Map<Medicine>(medicineDto);
+        this._unitOfWork.Medicines.Add(medicine);
         await _unitOfWork.SaveAsync();
 
-        if(reason == null)
+        if(medicine == null)
         {
             return BadRequest();
         }
 
-        return CreatedAtAction(nameof(Post), new{id=reason.Id}, reason);
+        return CreatedAtAction(nameof(Post), new{id=medicine.Id}, medicine);
     }
 
     [HttpPut()]
@@ -57,14 +57,14 @@ public class ReasonController : ApiBaseController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<Reason>> put(ReasonDto reasonDto)
+    public async Task<ActionResult<Medicine>> put(MedicineDto medicineDto)
     {
-        if(reasonDto == null){ return NotFound(); }
-        var reason = this._mapper.Map<Reason>(reasonDto);
-        this._unitOfWork.Reasons.Update(reason);
+        if(medicineDto == null){ return NotFound(); }
+        var medicine = this._mapper.Map<Medicine>(medicineDto);
+        this._unitOfWork.Medicines.Update(medicine);
         Console.WriteLine(await this._unitOfWork.SaveAsync());
 
-        return reason;
+        return medicine;
     }
 
     [HttpDelete("{id}")]
@@ -74,12 +74,12 @@ public class ReasonController : ApiBaseController
 
     public async Task<IActionResult> Delete(int id)
     {
-        var reason = await _unitOfWork.Reasons.GetByIdAsync(id);
-        if(reason == null)
+        var medicine = await _unitOfWork.Medicines.GetByIdAsync(id);
+        if(medicine == null)
         {
             return NotFound();
         }
-        this._unitOfWork.Reasons.Remove(reason);
+        this._unitOfWork.Medicines.Remove(medicine);
         await this._unitOfWork.SaveAsync();
         return NoContent();
     }

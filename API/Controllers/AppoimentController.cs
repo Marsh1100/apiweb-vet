@@ -28,28 +28,22 @@ public class AppoimentController : ApiBaseController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<IEnumerable<OwnerDto>>> Get()
+    public async Task<ActionResult<IEnumerable<AppoimentDto>>> Get()
     {
-        var owners = await _unitOfWork.Owners.GetAllAsync();
-        return _mapper.Map<List<OwnerDto>>(owners);
+        var appoiments = await _unitOfWork.Appoiments.GetAllAsync();
+        return _mapper.Map<List<AppoimentDto>>(appoiments);
     }
 
     [HttpPost()]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Owner>> Post([FromBody] OwnerDto ownerDto)
+    public async Task<ActionResult> Post([FromBody] AppoimentDto appoimentDto)
     {
-        var owner = _mapper.Map<Owner>(ownerDto);
-        this._unitOfWork.Owners.Add(owner);
-        await _unitOfWork.SaveAsync();
+        var appoiment = _mapper.Map<Appoiment>(appoimentDto);
+        var result =await _unitOfWork.Appoiments.RegisterAsync(appoiment);
 
-        if(owner == null)
-        {
-            return BadRequest();
-        }
-
-        return CreatedAtAction(nameof(Post), new{id=owner.Id}, owner);
+        return Ok(result);
     }
 
     [HttpPut()]
@@ -57,14 +51,14 @@ public class AppoimentController : ApiBaseController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<Owner>> put(OwnerDto OwnerDto)
+    public async Task<ActionResult<Appoiment>> put(AppoimentDto appoimentDto)
     {
-        if(OwnerDto == null){ return NotFound(); }
-        var owner = this._mapper.Map<Owner>(OwnerDto);
-        this._unitOfWork.Owners.Update(owner);
+        if(appoimentDto == null){ return NotFound(); }
+        var appoiment = this._mapper.Map<Appoiment>(appoimentDto);
+        this._unitOfWork.Appoiments.Update(appoiment);
         Console.WriteLine(await this._unitOfWork.SaveAsync());
 
-        return owner;
+        return appoiment;
     }
 
     [HttpDelete("{id}")]
@@ -74,12 +68,12 @@ public class AppoimentController : ApiBaseController
 
     public async Task<IActionResult> Delete(int id)
     {
-        var owner = await _unitOfWork.Owners.GetByIdAsync(id);
-        if(owner == null)
+        var appoiment = await _unitOfWork.Appoiments.GetByIdAsync(id);
+        if(appoiment == null)
         {
             return NotFound();
         }
-        this._unitOfWork.Owners.Remove(owner);
+        this._unitOfWork.Appoiments.Remove(appoiment);
         await this._unitOfWork.SaveAsync();
         return NoContent();
     }

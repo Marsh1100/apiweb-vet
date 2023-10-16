@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace API.Dtos;
 
-public class AppoimentDto
+public class MedicineDto
 {
     public int Id { get; set; }
     [Required]
-    public int PetId { get; set; }
+    public string Name { get; set; }
     [Required]
-    public DateTime Date { get; set; }
+    public int Stock { get; set; }
     [Required]
-    public int ReasonId { get; set; }
+    public double Price { get; set; }
     [Required]
-    public int VetId { get; set; }
+    public int LaboratoryId { get; set; }
+
 
 }
