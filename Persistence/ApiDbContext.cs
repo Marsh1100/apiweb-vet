@@ -28,7 +28,7 @@ public class ApiDbContext : DbContext
     public DbSet<Species> SpeciesP { get; set; }
     public DbSet<Breed> Breeds { get; set; }
     public DbSet<Medicine> Medicines { get; set; }
-    public DbSet<Laboratory> Laboratoriess { get; set; }
+    public DbSet<Laboratory> Laboratories { get; set; }
     public DbSet<MovementMedicine> MovementMedicines { get; set; }
     public DbSet<MovementType> MovementTypes { get; set; }
     public DbSet<Provider> Providers { get; set; }
