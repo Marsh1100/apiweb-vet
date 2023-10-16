@@ -18,5 +18,7 @@ public class SpeciesConfiguration : IEntityTypeConfiguration<Species>
         builder.Property(p=> p.Name)
             .HasMaxLength(50)
             .IsRequired();
+        builder.HasIndex(p=>p.Name)
+            .IsUnique();
     }
 }
