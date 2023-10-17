@@ -12,7 +12,7 @@ public class BreedConfiguration : IEntityTypeConfiguration<Breed>
 {
     public void Configure(EntityTypeBuilder<Breed> builder)
     {
-        builder.ToTable("bread");
+        builder.ToTable("breed");
         builder.Property(p=> p.Id)
             .IsRequired();
 
