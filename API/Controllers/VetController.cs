@@ -23,6 +23,7 @@ public class VetController : ApiBaseController
         _mapper = mapper;
     }
 
+    //CRUD
     [HttpGet]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -83,5 +84,19 @@ public class VetController : ApiBaseController
         await this._unitOfWork.SaveAsync();
         return NoContent();
     }
+    //Visualización de los veterinarios cuya especialidad sea Cirugía vascular.
+    [HttpGet("VeterinariansBySpeciality/{id}")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult> GetVeterinariansBySpecialty(int id)
+    {
+        var veterinarians =await _unitOfWork.Veterinarians.GetVeterinariansBySpecialty(id);
+        var veterinariansDto = _mapper.Map<IEnumerable<VetSpecialityDto>>(veterinarians);
+
+        return Ok(veterinariansDto);
+    }
+
 
 }

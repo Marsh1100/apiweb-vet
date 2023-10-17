@@ -43,5 +43,8 @@ public class MappingProfiles : Profile
             .ReverseMap();
         CreateMap<MovementMedicine, MovementMedicineDto>()
             .ReverseMap();
+
+        CreateMap<Vet, VetSpecialityDto>()
+            .ReverseMap();
     }   
 }
