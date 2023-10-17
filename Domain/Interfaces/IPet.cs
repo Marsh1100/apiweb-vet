@@ -9,5 +9,6 @@ namespace Domain.Interfaces;
 public interface IPet : IGenericRepository<Pet> 
 {
     Task<string> RegisterAsync(Pet modelPet);
+    Task<IEnumerable<Pet>> GetPetBySpecie(int id);
 
 }

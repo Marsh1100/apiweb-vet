@@ -1,6 +1,7 @@
 using System.Globalization;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Repository;
@@ -13,6 +14,7 @@ public class PetRepository : GenericRepository<Pet>, IPet
     {
        _context = context;
     }
+
 
     public async Task<string> RegisterAsync(Pet modelPet)
     {
@@ -37,4 +39,18 @@ public class PetRepository : GenericRepository<Pet>, IPet
             return "La fecha no esta escrita en un formato correcto";
         }
     }
+    public async Task<IEnumerable<Pet>> GetPetBySpecie(int id)
+    {
+        var pets =await _context.Pets.ToListAsync();
+        var breeds = await _context.Breeds.ToListAsync();
+        var speciesP = await _context.SpeciesP.ToListAsync();
+        
+        var petsBreed = from pet in pets
+                        join breed in breeds on pet.BreedId equals breed.Id
+                        join species in speciesP on breed.SpeciesId equals species.Id
+                        where species.Id == id
+                        select pet;
+        return petsBreed;
+    }
+    
 }

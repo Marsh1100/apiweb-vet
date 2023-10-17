@@ -1,5 +1,6 @@
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Repository;
@@ -11,5 +12,15 @@ public class MedicineRepository : GenericRepository<Medicine>, IMedicine
     public MedicineRepository(ApiDbContext context) : base(context)
     {
        _context = context;
+    }
+
+    public async Task<IEnumerable<Medicine>> GetMedicinesByLaboratory(int id)
+    {
+        var medicines = await _context.Medicines.Where(p=> p.LaboratoryId == id).ToListAsync();
+        if(medicines.Any())
+        {
+            return medicines;
+        }
+        return null;
     }
 }

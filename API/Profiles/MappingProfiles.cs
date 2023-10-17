@@ -46,5 +46,12 @@ public class MappingProfiles : Profile
 
         CreateMap<Vet, VetSpecialityDto>()
             .ReverseMap();
+        CreateMap<Medicine, MedicineByLabDto>()
+            .ReverseMap();
+
+        CreateMap<Pet, PetBySpeciesDto>()
+            .ForMember(dest => dest.Breed, origen=> origen.MapFrom(origen => origen.Breed.Name))
+            .ReverseMap();
+
     }   
 }

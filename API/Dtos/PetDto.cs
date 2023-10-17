@@ -10,10 +10,20 @@ public class PetDto
 {
     public int Id { get; set; }
     [Required]
+    public string Name { get; set; }
+    [Required]
     public int OwnerId { get; set; }  
     [Required]
     public int BreedId { get; set; }  
     [Required]
+    public DateTime Birthdate { get; set; }
+
+}
+public class PetBySpeciesDto
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Breed { get; set; }  
     public DateTime Birthdate { get; set; }
 
 }

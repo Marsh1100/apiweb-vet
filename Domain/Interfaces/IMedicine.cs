@@ -8,5 +8,5 @@ namespace Domain.Interfaces;
 
 public interface IMedicine : IGenericRepository<Medicine> 
 {
-    
+    Task<IEnumerable<Medicine>> GetMedicinesByLaboratory(int id);
 }
