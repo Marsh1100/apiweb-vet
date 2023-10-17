@@ -55,17 +55,11 @@ public class PetRepository : GenericRepository<Pet>, IPet
 
     public async Task<IEnumerable<object>> GetPetsBySpecie()
     {
-         var pets =await _context.Pets.ToListAsync();
+        var pets =await _context.Pets.ToListAsync();
         var breeds = await _context.Breeds.ToListAsync();
         var speciesP = await _context.SpeciesP.ToListAsync();
         
-        /*var petsBreed = (from pet in pets
-                        join breed in breeds on pet.BreedId equals breed.Id
-                        join species in speciesP on breed.SpeciesId equals species.Id
-                        select pet)
-                        .GroupBy(g=> g.Breed.Species.Name);*/
-        
-        var petsBreed2 =(from pet in pets
+        var petsSpecie =(from pet in pets
                         join breed in breeds on pet.BreedId equals breed.Id
                         join species in speciesP on breed.SpeciesId equals species.Id
                         group pet by pet.Breed.Species.Name)
@@ -81,7 +75,7 @@ public class PetRepository : GenericRepository<Pet>, IPet
                         });
     
                        
-        return petsBreed2;
+        return petsSpecie;
     }
     public async Task<IEnumerable<Pet>> GetOwnerPetsByBreed(int id)
     {
@@ -94,5 +88,27 @@ public class PetRepository : GenericRepository<Pet>, IPet
                         where breed.Id == id
                         select pet;
         return petResult;
+    }
+
+    public async Task<IEnumerable<object>> GetQuantityPets()
+    {
+        var pets =await _context.Pets.ToListAsync();
+        var breeds = await _context.Breeds.ToListAsync();
+        var speciesP = await _context.SpeciesP.ToListAsync();
+        
+        var petsBreed =(from pet in pets
+                        join breed in breeds on pet.BreedId equals breed.Id
+                        join species in speciesP on breed.SpeciesId equals species.Id
+                        group pet by pet.Breed.Name)
+                        .Select(g=> new{
+                            Breed  = g.Key,
+                            Quantity =g.Count(),
+                            Pets = g.Select(s=> new
+                                         {
+                                            s.Name,
+                                            s.Birthdate
+                                         })
+                        });
+        return petsBreed;
     }
 }

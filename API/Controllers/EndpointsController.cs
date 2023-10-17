@@ -133,8 +133,15 @@ public class EndpointsController : ApiBaseController
 
         return Ok(petsDto);
     }
+    //12.Lista de la cantidad de mascotas que pertenecen a una raza.
+    [HttpGet("quantityPets")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-
-
-
+    public async Task<ActionResult> GetQuantityPets()
+    {
+        var pets =await _unitOfWork.Pets.GetQuantityPets();
+        return Ok(pets);
+    }
 }

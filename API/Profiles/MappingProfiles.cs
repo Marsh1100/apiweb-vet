@@ -62,8 +62,6 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.Breed, origen=> origen.MapFrom(origen => origen.Breed.Name))
             .ForMember(dest => dest.Species, origen=> origen.MapFrom(origen => origen.Breed.Species.Name))
             .ReverseMap();
-        
-
 
     }   
 }
