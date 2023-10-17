@@ -93,6 +93,19 @@ public class EndpointsController : ApiBaseController
         return Ok(medicineDto);
     }
 
+    //6.Lista de todas las mascotas agrupadas por especie.
+    [HttpGet("petsBySpecies")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult> GetPetsBySpecie()
+    {
+        var pets =await _unitOfWork.Pets.GetPetsBySpecie();
+
+        return Ok(pets);
+    }
+
 
 
 
