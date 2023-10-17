@@ -1,0 +1,11 @@
+Id,Name,Email,Phone,SpecialityId
+1,"Juan Pérez",juan.perez@gmail.com,3151234567,1
+2,"Ana Rodríguez",ana.rodriguez@yahoo.com,3172345678,2
+3,"Carlos López",carlos.lopez@hotmail.com,3163456789,3
+4,"Laura García",laura.garcia@gmail.com,3104567890,4
+5,"Sergio Martínez",sergio.martinez@yahoo.com,3145678901,5
+6,"Isabel González",isabel.gonzalez@hotmail.com,3116789012,1
+7,"Miguel Torres",miguel.torres@gmail.com,3137890123,2
+8,"Valeria Jiménez",valeria.jimenez@yahoo.com,3128901234,3
+9,"Fernando Ruiz",fernando.ruiz@hotmail.com,3199012345,4
+10,"Luisa Sánchez",luisa.sanchez@gmail.com,3180123456,5

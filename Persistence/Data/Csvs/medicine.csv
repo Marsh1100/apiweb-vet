@@ -1,0 +1,11 @@
+Id,Name,Stock,Price,LaboratoryId
+1,MedicamentoA,10,5000,1
+2,MedicamentoB,8,7500.5,2
+3,MedicamentoC,15,3000.25,9
+4,MedicamentoD,7,6000.75,9
+5,MedicamentoE,12,4500.99,10
+6,MedicamentoF,9,6500.25,6
+7,MedicamentoG,11,4200.75,7
+8,MedicamentoH,14,5400.5,1
+9,MedicamentoI,6,7100,1
+10,MedicamentoJ,13,4800.99,5
