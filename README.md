@@ -12,7 +12,7 @@ Proyecto webapi de cuatro capas usando NetCore7.0 para la administración de una
   9. Lista de las mascotas que fueron atendidas por un determinado veterinario.
   10. Lista de los proveedores que me venden un determinado medicamento.
   11. Lista de las mascotas y sus propietarios cuya raza sea Golden Retriver.
-  12. Lista de la cantidad de mascotas que pertenecen a una raza a una raza.
+  12. Lista de la cantidad de mascotas que pertenecen a una raza.
 ### Pre-requisitos 📋
 MySQL<br>
 NetCore 7.0
