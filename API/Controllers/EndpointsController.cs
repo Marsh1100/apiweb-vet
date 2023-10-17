@@ -46,7 +46,7 @@ public class EndpointsController : ApiBaseController
     public async Task<ActionResult> GetMedicinesByLaboratory(int id)
     {
         var medicines =await _unitOfWork.Medicines.GetMedicinesByLaboratory(id);
-        var medicinesDto = _mapper.Map<IEnumerable<MedicineByLabDto>>(medicines);
+        var medicinesDto = _mapper.Map<IEnumerable<MedicineBaseDto>>(medicines);
 
         return Ok(medicinesDto);
     }
@@ -60,10 +60,39 @@ public class EndpointsController : ApiBaseController
     public async Task<ActionResult> GetPetBySpecie(int id)
     {
         var pets =await _unitOfWork.Pets.GetPetBySpecie(id);
-        var petsDto = _mapper.Map<IEnumerable<PetBySpeciesDto>>(pets);
+        var petsDto = _mapper.Map<IEnumerable<PetsOnlyDto>>(pets);
 
         return Ok(petsDto);
     }
+
+    //4.Lista de los propietarios y sus mascotas.
+    [HttpGet("ownerPets")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult> GetOwnerPets()
+    {
+        var pets =await _unitOfWork.Owners.GetOwnerPets();
+        var petsDto = _mapper.Map<IEnumerable<OwnerPetsDto>>(pets);
+
+        return Ok(petsDto);
+    }
+
+    //5.Lista de los medicamentos que tenga un precio de venta mayor a 50000.
+    [HttpGet("medicinesPrice/{price}")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult> GetMedicinesPrice(double price)
+    {
+        var medicine =await _unitOfWork.Medicines.GetMedicinesPrice(price);
+        var medicineDto = _mapper.Map<IEnumerable<MedicinePriceDto>>(medicine);
+
+        return Ok(medicineDto);
+    }
+
 
 
 

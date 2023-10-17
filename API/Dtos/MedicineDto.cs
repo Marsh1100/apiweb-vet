@@ -5,8 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace API.Dtos;
-
-public class MedicineDto
+public class MedicineBaseDto
 {
     public int Id { get; set; }
     [Required]
@@ -15,14 +14,15 @@ public class MedicineDto
     public int Stock { get; set; }
     [Required]
     public double Price { get; set; }
+}
+
+public class MedicineDto : MedicineBaseDto
+{
     [Required]
     public int LaboratoryId { get; set; }
 }
-
-public class MedicineByLabDto
+public class MedicinePriceDto : MedicineBaseDto
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public int Stock { get; set; }
-    public double Price { get; set; }
+    public string Laboratory { get; set; }
 }
+

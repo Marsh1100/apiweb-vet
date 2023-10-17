@@ -46,12 +46,20 @@ public class MappingProfiles : Profile
 
         CreateMap<Vet, VetSpecialityDto>()
             .ReverseMap();
-        CreateMap<Medicine, MedicineByLabDto>()
+        CreateMap<Medicine, MedicineBaseDto>()
             .ReverseMap();
 
-        CreateMap<Pet, PetBySpeciesDto>()
+        CreateMap<Pet, PetsOnlyDto>()
             .ForMember(dest => dest.Breed, origen=> origen.MapFrom(origen => origen.Breed.Name))
             .ReverseMap();
+        CreateMap<Owner, OwnerPetsDto>()
+            .ForMember(dest => dest.Pets, origen=> origen.MapFrom(origen => origen.Pets))
+            .ReverseMap();
+        CreateMap<Medicine, MedicinePriceDto>()
+            .ForMember(dest => dest.Laboratory, origen=> origen.MapFrom(origen => origen.Laboratory.Name))
+            .ReverseMap();
+        
+
 
     }   
 }

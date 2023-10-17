@@ -8,5 +8,5 @@ namespace Domain.Interfaces;
 
 public interface IOwner : IGenericRepository<Owner> 
 {
-    
+    Task<IEnumerable<Owner>> GetOwnerPets();
 }

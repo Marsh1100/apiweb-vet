@@ -19,7 +19,7 @@ public class PetDto
     public DateTime Birthdate { get; set; }
 
 }
-public class PetBySpeciesDto
+public class PetsOnlyDto
 {
     public int Id { get; set; }
     public string Name { get; set; }
