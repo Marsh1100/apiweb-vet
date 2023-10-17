@@ -8,5 +8,5 @@ namespace Domain.Interfaces;
 
 public interface IProvider : IGenericRepository<Provider> 
 {
-    
+  Task<IEnumerable<Provider>> GetProvidersByMedicine(int id); 
 }

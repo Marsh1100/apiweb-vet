@@ -21,4 +21,13 @@ public class ProviderRepository : GenericRepository<Provider>, IProvider
             .FirstOrDefaultAsync(p => p.Id == id);
 
     }
+
+    public async Task<IEnumerable<Provider>> GetProvidersByMedicine(int id)
+    {
+        var providers = await _context.Providers
+                        .Include(p=> p.Medicines)
+                        .Where(p=> p.Medicines.Any(a=> a.Id == id))
+                        .ToListAsync();
+       return providers;
+    }
 }

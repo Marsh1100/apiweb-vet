@@ -93,7 +93,7 @@ public class EndpointsController : ApiBaseController
         return Ok(medicineDto);
     }
 
-    //6.Lista de todas las mascotas agrupadas por especie.
+    //7.Lista de todas las mascotas agrupadas por especie.
     [HttpGet("petsBySpecies")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -104,6 +104,20 @@ public class EndpointsController : ApiBaseController
         var pets =await _unitOfWork.Pets.GetPetsBySpecie();
 
         return Ok(pets);
+    }
+
+    //10.Lista de los proveedores que me venden un determinado medicamento.
+    [HttpGet("providersByMedicine/{id}")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<Provider>> GetProvidersByMedicine(int id)
+    {
+        var provider =await _unitOfWork.Providers.GetProvidersByMedicine(id);
+        var providerDto = _mapper.Map<IEnumerable<ProviderDto>>(provider);
+
+        return Ok(providerDto);
     }
 
 
