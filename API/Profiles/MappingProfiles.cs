@@ -58,6 +58,10 @@ public class MappingProfiles : Profile
         CreateMap<Medicine, MedicinePriceDto>()
             .ForMember(dest => dest.Laboratory, origen=> origen.MapFrom(origen => origen.Laboratory.Name))
             .ReverseMap();
+        CreateMap<Pet, PetsOwnerDto>()
+            .ForMember(dest => dest.Breed, origen=> origen.MapFrom(origen => origen.Breed.Name))
+            .ForMember(dest => dest.Species, origen=> origen.MapFrom(origen => origen.Breed.Species.Name))
+            .ReverseMap();
         
 
 

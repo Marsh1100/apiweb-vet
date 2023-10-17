@@ -21,4 +21,5 @@ public class OwnerRepository : GenericRepository<Owner>, IOwner
                         .ToListAsync();
         return ownerPets;
     }
+
 }

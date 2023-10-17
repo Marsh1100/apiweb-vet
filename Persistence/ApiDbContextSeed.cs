@@ -211,6 +211,34 @@ public class ApiDbContextSeed
                     }
                 }
             }
+
+             if(!context.Breeds.Any())
+            {
+                using (var reader = new StreamReader("../Persistence/Data/Csvs/breed.csv"))
+                {
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+                    {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
+                        var list = csv.GetRecords<Breed>();
+                        List<Breed> entidad = new();
+                        foreach (var item in list)
+                        {
+                            entidad.Add(new Breed
+                            {
+                                Id = item.Id,
+                                Name = item.Name,
+                                SpeciesId = item.SpeciesId
+                            });
+                        }
+                        context.Breeds.AddRange(entidad);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
             if(!context.Pets.Any())
             {
                 using (var reader = new StreamReader("../Persistence/Data/Csvs/pet.csv"))

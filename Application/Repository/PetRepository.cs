@@ -83,4 +83,16 @@ public class PetRepository : GenericRepository<Pet>, IPet
                        
         return petsBreed2;
     }
+    public async Task<IEnumerable<Pet>> GetOwnerPetsByBreed(int id)
+    {
+        var pets =await _context.Pets.ToListAsync();
+        var breeds = await _context.Breeds.ToListAsync();
+        var speciesP = await _context.SpeciesP.ToListAsync();
+        
+        var petResult = from pet in pets
+                        join breed in breeds on pet.BreedId equals breed.Id
+                        where breed.Id == id
+                        select pet;
+        return petResult;
+    }
 }

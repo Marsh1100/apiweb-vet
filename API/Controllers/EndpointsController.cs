@@ -120,6 +120,19 @@ public class EndpointsController : ApiBaseController
         return Ok(providerDto);
     }
 
+    //11.Lista de las mascotas y sus propietarios cuya raza sea Golden Retriver
+    [HttpGet("ownerPetsByBreed/{id}")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult> GetOwnerPetsByBreed(int id)
+    {
+        var pets =await _unitOfWork.Pets.GetOwnerPetsByBreed(id);
+        var petsDto = _mapper.Map<IEnumerable<PetsOwnerDto>>(pets);
+
+        return Ok(petsDto);
+    }
 
 
 
