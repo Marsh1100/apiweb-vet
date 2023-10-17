@@ -1,7 +1,7 @@
 # Proyecto Administración de Veterinaria
 Proyecto webapi de cuatro capas usando NetCore7.0 para la administración de una veterinaria. Empleando como gestor de base de datos MySql.
 ### ¿Qué se va obtener?
-  1. Visualización de los veterinarios cuya especialidad sea Cirujano vascular.
+  1. Visualización de los veterinarios cuya especialidad sea cirugía vascular.
   2. Lista de los medicamentos que pertenezcan a el laboratorio Genfar.
   3. Mascotas que se encuentren registradas cuya especie sea felina.
   4. Lista de los propietarios y sus mascotas.
@@ -17,5 +17,5 @@ Proyecto webapi de cuatro capas usando NetCore7.0 para la administración de una
 MySQL<br>
 NetCore 7.0
 ### Base de datos
-![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/3fd5ee5a-2e2a-4d97-a4b3-ae0e61c69ef0)
+![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/235b6075-ce22-4fce-a6fb-415fad771dee)
 
