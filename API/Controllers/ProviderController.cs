@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos;
+using API.Services;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -15,12 +16,14 @@ namespace API.Controllers;
 public class ProviderController : ApiBaseController
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IUserService _userService;
     private readonly IMapper _mapper;
 
-    public ProviderController(IUnitOfWork unitOfWork, IMapper mapper)
+    public ProviderController(IUnitOfWork unitOfWork, IMapper mapper, IUserService userService)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _userService = userService;
     }
 
     [HttpGet]
@@ -82,6 +85,18 @@ public class ProviderController : ApiBaseController
         this._unitOfWork.Providers.Remove(provider);
         await this._unitOfWork.SaveAsync();
         return NoContent();
+    }
+
+    [HttpPost("addMedicine")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> PostMedicine([FromBody] AddMedicineProviderDto model)
+    {
+       
+        var result =await _userService.AddMedicineProvider(model);
+
+        return Ok(result);
     }
 
 }

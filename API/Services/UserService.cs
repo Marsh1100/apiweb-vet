@@ -146,9 +146,14 @@ public class UserService : IUserService
                     user.Roles.Add(rolExists);
                     _unitOfWork.Users.Update(user);
                     await _unitOfWork.SaveAsync();
+                    return $"Role {model.Role} added to user {model.UserName} successfully.";
+
+                }else
+                {
+                    return $"User has Role";
+
                 }
 
-                return $"Role {model.Role} added to user {model.UserName} successfully.";
             }
 
             return $"Role {model.Role} was not found.";
@@ -236,5 +241,36 @@ public class UserService : IUserService
         return jwtSecurityToken;
     }
 
-    
+    public async Task<string> AddMedicineProvider(AddMedicineProviderDto model)
+    {
+        var provider =await _unitOfWork.Providers.GetByIdAsync(model.ProviderId);
+        if (provider == null)
+        {
+            return $"Proveedor con ID {model.ProviderId} no existe.";
+        }
+
+        var medicineExists = _unitOfWork.Medicines
+                                        .Find(u => u.Name.ToLower() == model.Medicine.ToLower())
+                                        .FirstOrDefault();
+        if(medicineExists != null)
+        {
+            var providerHasMedicine= provider.Medicines
+                                            .Where(u => u.Id == medicineExists.Id)
+                                            .FirstOrDefault();
+            if(providerHasMedicine == null)
+            {
+                provider.Medicines.Add(medicineExists);
+                _unitOfWork.Providers.Update(provider);
+                await _unitOfWork.SaveAsync();
+                return $"Al proveedor {provider.Name} le ha sido asignado el medicamento {medicineExists.Name} correctamente!!";
+            }else
+            {
+                return $"El proveedor {provider.Name} ya tiene el medicamento {model.Medicine}.";
+            }
+        }else
+        {
+            return $"El medicamento {model.Medicine} no se encuentra registrado en la base de datos. Por favor registrelo para asociar proveedor.";
+        }
+
+    }
 }
