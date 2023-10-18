@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos;
+using API.Helpers;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -32,6 +33,16 @@ public class SpecialityController : ApiBaseController
     {
         var specialities = await _unitOfWork.Specialities.GetAllAsync();
         return _mapper.Map<List<SpecialityDto>>(specialities);
+    }
+    [HttpGet]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<SpecialityDto>>> GetPagination([FromQuery] Params p)
+    {
+        var specialities = await _unitOfWork.Providers.GetAllAsync(p.PageIndex, p.PageSize, p.Search);
+        var specialitiesDto = _mapper.Map<List<SpecialityDto>>(specialities.registros);
+        return  new Pager<SpecialityDto>(specialitiesDto,specialities.totalRegistros, p.PageIndex, p.PageSize, p.Search);
     }
 
     [HttpPost()]

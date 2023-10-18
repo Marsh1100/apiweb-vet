@@ -11,6 +11,20 @@ public class UserRepository : GenericRepository<User>, IUserRepository
     {
         _context = context;
     }
+    public override async Task<(int totalRegistros, IEnumerable<User> registros)> GetAllAsync(int pageIndex, int pageSize, string search)
+    {
+        var query = _context.Users as IQueryable<User>;
+        if(!string.IsNullOrEmpty(search))
+        {
+            query = query.Where(p=>p.IdenNumber.ToLower().Contains(search));
+        }
+        var totalRegistros = await query.CountAsync();
+        var registros = await query 
+                            .Skip((pageIndex-1)*pageSize)
+                            .Take(pageSize)
+                            .ToListAsync();
+        return (totalRegistros, registros);
+    }
 
     public async Task<User> GetByRefreshTokenAsync(string refreshToken)
     {

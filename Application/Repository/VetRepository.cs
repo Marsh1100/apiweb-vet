@@ -13,6 +13,20 @@ public class VetRepository : GenericRepository<Vet>, IVet
     {
        _context = context;
     }
+    public override async Task<(int totalRegistros, IEnumerable<Vet> registros)> GetAllAsync(int pageIndex, int pageSize, string search)
+    {
+        var query = _context.Veterinarians.Include(p=>p.Speciality) as IQueryable<Vet>;
+        if(!string.IsNullOrEmpty(search))
+        {
+            query = query.Where(p=>p.Name.ToLower().Contains(search));
+        }
+        var totalRegistros = await query.CountAsync();
+        var registros = await query 
+                            .Skip((pageIndex-1)*pageSize)
+                            .Take(pageSize)
+                            .ToListAsync();
+        return (totalRegistros, registros);
+    }
 
     public async Task<IEnumerable<Vet>> GetVeterinariansBySpecialty(int id)
     {

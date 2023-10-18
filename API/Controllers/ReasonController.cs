@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos;
+using API.Helpers;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -32,6 +33,16 @@ public class ReasonController : ApiBaseController
     {
         var reasons = await _unitOfWork.Reasons.GetAllAsync();
         return _mapper.Map<List<ReasonDto>>(reasons);
+    }
+    [HttpGet]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<ReasonDto>>> GetPagination([FromQuery] Params p)
+    {
+        var reason = await _unitOfWork.Reasons.GetAllAsync(p.PageIndex, p.PageSize, p.Search);
+        var reasonDto = _mapper.Map<List<ReasonDto>>(reason.registros);
+        return  new Pager<ReasonDto>(reasonDto,reason.totalRegistros, p.PageIndex, p.PageSize, p.Search);
     }
 
     [HttpPost()]

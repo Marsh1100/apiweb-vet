@@ -51,6 +51,7 @@ public class MappingProfiles : Profile
 
         CreateMap<Pet, PetsOnlyDto>()
             .ForMember(dest => dest.Breed, origen=> origen.MapFrom(origen => origen.Breed.Name))
+            .ForMember(dest => dest.Owner, origen=> origen.MapFrom(origen => origen.Owner.Name))
             .ReverseMap();
         CreateMap<Owner, OwnerPetsDto>()
             .ForMember(dest => dest.Pets, origen=> origen.MapFrom(origen => origen.Pets))
@@ -68,6 +69,27 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.Breed, origen=> origen.MapFrom(origen => origen.Pet.Breed.Name))
             .ForMember(dest => dest.Birthdate, origen=> origen.MapFrom(origen => origen.Pet.Birthdate))
             .ReverseMap();
+        
+        CreateMap<Provider, ProviderAllDto>()
+            .ForMember(dest => dest.Medicines, origen=> origen.MapFrom(origen => origen.Medicines))
+            .ReverseMap();
+        CreateMap<Vet,VetAllDto>()
+            .ForMember(dest=> dest.Speciality, origen=> origen.MapFrom(origen => origen.Speciality.Name))
+            .ReverseMap();
+        CreateMap<Breed, BreedDto>()
+            .ReverseMap();
+        CreateMap<MovementMedicine, MovementMedicineAllDto>()
+            .ForMember(dest => dest.Medicine, origen=> origen.MapFrom(origen => origen.Medicine.Name))
+            .ForMember(dest => dest.MovementType, origen=> origen.MapFrom(origen => origen.MovementType.Name))
+            .ReverseMap();
+        CreateMap<Appoiment, AppoimentAllDto>()
+            .ForMember(dest => dest.Vet, origen=> origen.MapFrom(origen => origen.Vet.Name))
+            .ForMember(dest => dest.Reason, origen=> origen.MapFrom(origen => origen.Reason.Name))
+            .ForMember(dest => dest.Pet, origen=> origen.MapFrom(origen => origen.Pet.Name))
+            .ReverseMap();
+        CreateMap<User, UserDto>()
+            .ReverseMap();
+
 
     }   
 }

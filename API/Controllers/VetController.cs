@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos;
+using API.Helpers;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -33,6 +34,16 @@ public class VetController : ApiBaseController
     {
         var vets = await _unitOfWork.Veterinarians.GetAllAsync();
         return _mapper.Map<List<VetDto>>(vets);
+    }
+    [HttpGet]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<VetAllDto>>> GetPagination([FromQuery] Params p)
+    {
+        var vets = await _unitOfWork.Veterinarians.GetAllAsync(p.PageIndex, p.PageSize, p.Search);
+        var vetsDto = _mapper.Map<List<VetAllDto>>(vets.registros);
+        return  new Pager<VetAllDto>(vetsDto,vets.totalRegistros, p.PageIndex, p.PageSize, p.Search);
     }
 
     [HttpPost()]

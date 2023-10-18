@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos;
+using API.Helpers;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -32,6 +33,16 @@ public class SpeciesController : ApiBaseController
     {
         var speciesp = await _unitOfWork.SpeciesP.GetAllAsync();
         return _mapper.Map<List<SpeciesDto>>(speciesp);
+    }
+    [HttpGet]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<SpeciesDto>>> GetPagination([FromQuery] Params p)
+    {
+        var species = await _unitOfWork.SpeciesP.GetAllAsync(p.PageIndex, p.PageSize, p.Search);
+        var speciesDto = _mapper.Map<List<SpeciesDto>>(species.registros);
+        return  new Pager<SpeciesDto>(speciesDto,species.totalRegistros, p.PageIndex, p.PageSize, p.Search);
     }
 
     [HttpPost()]

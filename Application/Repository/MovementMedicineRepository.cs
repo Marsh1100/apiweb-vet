@@ -14,7 +14,20 @@ public class MovementMedicineRepository : GenericRepository<MovementMedicine>, I
     {
        _context = context;
     }
-
+    public override async Task<(int totalRegistros, IEnumerable<MovementMedicine> registros)> GetAllAsync(int pageIndex, int pageSize, string search)
+    {
+        var query = _context.MovementMedicines.Include(p=>p.MovementType).Include(p=>p.Medicine) as IQueryable<MovementMedicine>;
+        if(!string.IsNullOrEmpty(search))
+        {
+            query = query.Where(p=>p.Medicine.Name.ToLower().Contains(search));
+        }
+        var totalRegistros = await query.CountAsync();
+        var registros = await query 
+                            .Skip((pageIndex-1)*pageSize)
+                            .Take(pageSize)
+                            .ToListAsync();
+        return (totalRegistros, registros);
+    }
     public async Task<IEnumerable<object>> GetMovementMedicines()
     {
         var movs = await _context.MovementMedicines

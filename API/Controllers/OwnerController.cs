@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos;
+using API.Helpers;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -32,6 +33,16 @@ public class OwnerController : ApiBaseController
     {
         var owners = await _unitOfWork.Owners.GetAllAsync();
         return _mapper.Map<List<OwnerDto>>(owners);
+    }
+    [HttpGet]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<OwnerDto>>> GetPagination([FromQuery] Params p)
+    {
+        var owners = await _unitOfWork.Owners.GetAllAsync(p.PageIndex, p.PageSize, p.Search);
+        var ownersDto = _mapper.Map<List<OwnerDto>>(owners.registros);
+        return  new Pager<OwnerDto>(ownersDto,owners.totalRegistros, p.PageIndex, p.PageSize, p.Search);
     }
 
     [HttpPost()]

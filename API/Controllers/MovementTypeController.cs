@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos;
+using API.Helpers;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -32,6 +33,16 @@ public class MovementTypeController : ApiBaseController
     {
         var mtypes = await _unitOfWork.MovementTypes.GetAllAsync();
         return _mapper.Map<List<MovementTypeDto>>(mtypes);
+    }
+    [HttpGet]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<MovementTypeDto>>> GetPagination([FromQuery] Params p)
+    {
+        var mov = await _unitOfWork.MovementTypes.GetAllAsync(p.PageIndex, p.PageSize, p.Search);
+        var movDto = _mapper.Map<List<MovementTypeDto>>(mov.registros);
+        return  new Pager<MovementTypeDto>(movDto,mov.totalRegistros, p.PageIndex, p.PageSize, p.Search);
     }
 
     [HttpPost()]

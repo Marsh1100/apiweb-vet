@@ -14,7 +14,20 @@ public class PetRepository : GenericRepository<Pet>, IPet
     {
        _context = context;
     }
-
+    public override async Task<(int totalRegistros, IEnumerable<Pet> registros)> GetAllAsync(int pageIndex, int pageSize, string search)
+    {
+        var query = _context.Pets.Include(p=>p.Owner).Include(p=>p.Breed) as IQueryable<Pet>;
+        if(!string.IsNullOrEmpty(search))
+        {
+            query = query.Where(p=>p.Name.ToLower().Contains(search));
+        }
+        var totalRegistros = await query.CountAsync();
+        var registros = await query 
+                            .Skip((pageIndex-1)*pageSize)
+                            .Take(pageSize)
+                            .ToListAsync();
+        return (totalRegistros, registros);
+    }
 
     public async Task<string> RegisterAsync(Pet modelPet)
     {
@@ -32,7 +45,7 @@ public class PetRepository : GenericRepository<Pet>, IPet
             };
             _context.Pets.Add(newPet);
             await _context.SaveChangesAsync();
-            return "Cita asignada con exito!";
+            return "Máscota registrada con éxito!";
 
 
         }else{

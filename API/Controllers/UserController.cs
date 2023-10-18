@@ -3,18 +3,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos;
+using API.Helpers;
 using API.Services;
+using AutoMapper;
+using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
-
+[ApiVersion("1.0")]
+[ApiVersion("1.1")]
 public class UserController : ApiBaseController
 {
     private readonly IUserService _userService;
+    private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public UserController(IUserService userService)
+    public UserController(IUserService userService, IMapper mapper, IUnitOfWork unitOfWork)
     {
         _userService = userService;
+        _mapper = mapper;
+        _unitOfWork = unitOfWork;
+    }
+    [HttpGet()]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<IEnumerable<UserDto>>> Get()
+    {
+        var users = await _unitOfWork.Users.GetAllAsync();
+        return _mapper.Map<List<UserDto>>(users);
+    }
+    [HttpGet]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<UserDto>>> GetPagination([FromQuery] Params p)
+    {
+        var users = await _unitOfWork.Users.GetAllAsync(p.PageIndex, p.PageSize, p.Search);
+        var usersDto = _mapper.Map<List<UserDto>>(users.registros);
+        return  new Pager<UserDto>(usersDto,users.totalRegistros, p.PageIndex, p.PageSize, p.Search);
     }
     [HttpPost("register")]
     public async Task<ActionResult> RegisterAsync(RegisterDto model)

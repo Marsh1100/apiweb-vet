@@ -23,7 +23,7 @@ public class ProviderRepository : GenericRepository<Provider>, IProvider
     }
     public override async Task<(int totalRegistros, IEnumerable<Provider> registros)> GetAllAsync(int pageIndex, int pageSize, string search)
     {
-        var query = _context.Providers as IQueryable<Provider>;
+        var query = _context.Providers.Include(p=>p.Medicines) as IQueryable<Provider>;
         if(!string.IsNullOrEmpty(search))
         {
             query = query.Where(p=>p.Name.ToLower().Contains(search));

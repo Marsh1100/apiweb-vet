@@ -13,12 +13,12 @@ namespace API.Controllers;
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
 
-public class PetController : ApiBaseController
+public class BreedController : ApiBaseController
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public PetController(IUnitOfWork unitOfWork, IMapper mapper)
+    public BreedController(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -29,32 +29,38 @@ public class PetController : ApiBaseController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<IEnumerable<PetDto>>> Get()
+    public async Task<ActionResult<IEnumerable<BreedDto>>> Get()
     {
-        var appoiments = await _unitOfWork.Pets.GetAllAsync();
-        return _mapper.Map<List<PetDto>>(appoiments);
+        var breeds = await _unitOfWork.Breeds.GetAllAsync();
+        return _mapper.Map<List<BreedDto>>(breeds);
     }
-     [HttpGet]
+    [HttpGet]
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Pager<PetsOnlyDto>>> GetPagination([FromQuery] Params p)
+    public async Task<ActionResult<Pager<BreedDto>>> GetPagination([FromQuery] Params p)
     {
-        var pets = await _unitOfWork.Pets.GetAllAsync(p.PageIndex, p.PageSize, p.Search);
-        var petsDto = _mapper.Map<List<PetsOnlyDto>>(pets.registros);
-        return  new Pager<PetsOnlyDto>(petsDto,pets.totalRegistros, p.PageIndex, p.PageSize, p.Search);
+        var breed = await _unitOfWork.Breeds.GetAllAsync(p.PageIndex, p.PageSize, p.Search);
+        var breedDto = _mapper.Map<List<BreedDto>>(breed.registros);
+        return  new Pager<BreedDto>(breedDto,breed.totalRegistros, p.PageIndex, p.PageSize, p.Search);
     }
 
     [HttpPost()]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> Post([FromBody] PetDto petDto)
+    public async Task<ActionResult<Breed>> Post([FromBody] BreedDto breedDto)
     {
-        var pet = _mapper.Map<Pet>(petDto);
-        var result =await _unitOfWork.Pets.RegisterAsync(pet);
+        var breed = _mapper.Map<Breed>(breedDto);
+        this._unitOfWork.Breeds.Add(breed);
+        await _unitOfWork.SaveAsync();
 
-        return Ok(result);
+        if(breed == null)
+        {
+            return BadRequest();
+        }
+
+        return CreatedAtAction(nameof(Post), new{id=breed.Id}, breed);
     }
 
     [HttpPut()]
@@ -62,14 +68,14 @@ public class PetController : ApiBaseController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<PetDto>> put(PetDto petDto)
+    public async Task<ActionResult<Breed>> put(BreedDto breedDto)
     {
-        if(petDto == null){ return NotFound(); }
-        var pet = this._mapper.Map<Pet>(petDto);
-        this._unitOfWork.Pets.Update(pet);
+        if(breedDto == null){ return NotFound(); }
+        var breed = this._mapper.Map<Breed>(breedDto);
+        this._unitOfWork.Breeds.Update(breed);
         Console.WriteLine(await this._unitOfWork.SaveAsync());
-        var pet2dto = _mapper.Map<PetDto>(pet);
-        return pet2dto;
+
+        return breed;
     }
 
     [HttpDelete("{id}")]
@@ -79,12 +85,12 @@ public class PetController : ApiBaseController
 
     public async Task<IActionResult> Delete(int id)
     {
-        var pet = await _unitOfWork.Pets.GetByIdAsync(id);
-        if(pet == null)
+        var breed = await _unitOfWork.Breeds.GetByIdAsync(id);
+        if(breed == null)
         {
             return NotFound();
         }
-        this._unitOfWork.Pets.Remove(pet);
+        this._unitOfWork.Breeds.Remove(breed);
         await this._unitOfWork.SaveAsync();
         return NoContent();
     }

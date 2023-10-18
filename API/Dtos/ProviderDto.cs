@@ -16,6 +16,16 @@ public class ProviderDto
     public string Address { get; set; }
    
 }
+public class ProviderAllDto
+{
+    public int Id { get; set; }
+
+    public string Name { get; set; }
+    public string Address { get; set; }
+    public IEnumerable<MedicineBaseDto> Medicines { get; set; }
+   
+}
+
 public class ProviderPutDto
 {
     [Required]

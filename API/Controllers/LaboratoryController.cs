@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos;
+using API.Helpers;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -32,6 +33,16 @@ public class LaboratoryController : ApiBaseController
     {
         var labs = await _unitOfWork.Laboratories.GetAllAsync();
         return _mapper.Map<List<LaboratoryDto>>(labs);
+    }
+     [HttpGet]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<LaboratoryDto>>> GetPagination([FromQuery] Params p)
+    {
+        var labs = await _unitOfWork.Laboratories.GetAllAsync(p.PageIndex, p.PageSize, p.Search);
+        var labsDto = _mapper.Map<List<LaboratoryDto>>(labs.registros);
+        return  new Pager<LaboratoryDto>(labsDto,labs.totalRegistros, p.PageIndex, p.PageSize, p.Search);
     }
 
     [HttpPost()]

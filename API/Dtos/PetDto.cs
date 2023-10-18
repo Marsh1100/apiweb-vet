@@ -22,6 +22,7 @@ public class PetDto
 public class PetsOnlyDto
 {
     public int Id { get; set; }
+    public string Owner  {get; set; }
     public string Name { get; set; }
     public string Breed { get; set; }  
     public DateTime Birthdate { get; set; }
