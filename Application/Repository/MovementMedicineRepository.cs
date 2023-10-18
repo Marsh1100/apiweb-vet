@@ -15,6 +15,26 @@ public class MovementMedicineRepository : GenericRepository<MovementMedicine>, I
        _context = context;
     }
 
+    public async Task<IEnumerable<object>> GetMovementMedicines()
+    {
+        var movs = await _context.MovementMedicines
+                    .Include(p=>p.MovementType)
+                    .Include(p=>p.Medicine)
+                    .GroupBy(o=> o.MovementType.Name)
+                    .Select(s=> new{
+                        MovementType = s.Key,
+                        MovementMedicines = s.Select(s=> new
+                                         {
+                                            medicine = s.Medicine.Name,
+                                            s.Date,
+                                            s.Quantity,
+                                            s.UnitPrice
+                                         })
+                    })
+                    .ToListAsync();
+        return movs;
+    }
+
     public async Task<string> RegisterAsync(MovementMedicine model)
     {
         string strDate= model.Date.ToString("yyyy-MM-ddTHH:mm:ss.ffffffZ");

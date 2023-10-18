@@ -117,7 +117,18 @@ public class EndpointsController : ApiBaseController
 
         return Ok(pets);
     }
-    //8.
+    //8.Lista de todos los movimientos de medicamentos y el valor total de cada movimiento.
+    [HttpGet("movementMedicines")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult> GetMovementMedicines()
+    {
+        var mov =await _unitOfWork.MovementMedicines.GetMovementMedicines();
+
+        return Ok(mov);
+    }
     //9.Lista de las mascotas que fueron atendidas por un determinado veterinario.
     [HttpGet("petsByVeterinarian/{id}")]
     [MapToApiVersion("1.0")]
