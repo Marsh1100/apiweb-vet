@@ -21,6 +21,7 @@ public class ApiDbContext : DbContext
     public DbSet<UserRol> UserRoles { get; set; }
 
     public DbSet<Appoiment> Appoiments { get; set; }
+    public DbSet<Reason> Reasons { get; set; }
     public DbSet<Vet> Veterinarians { get; set; }
     public DbSet<Speciality> Specialities { get; set; }
     public DbSet<Pet> Pets { get; set; }
