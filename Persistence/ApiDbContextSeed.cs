@@ -37,6 +37,18 @@ public class ApiDbContextSeed
                 context.MovementTypes.AddRange(movementTypes);
                 await context.SaveChangesAsync();
             }
+            if (!context.Reasons.Any())
+            {
+                var reasons = new List<Reason>
+                {
+                    new() { Name = "Vacunación" },
+                    new() { Name = "Control" },
+                    new() { Name = "Abrir historia clínica" }
+                };
+                context.Reasons.AddRange(reasons);
+                await context.SaveChangesAsync();
+            }
+
         }catch(Exception ex)
         {
             var logger = loggerFactory.CreateLogger<ApiDbContext>();
@@ -212,7 +224,7 @@ public class ApiDbContextSeed
                 }
             }
 
-             if(!context.Breeds.Any())
+            if(!context.Breeds.Any())
             {
                 using (var reader = new StreamReader("../Persistence/Data/Csvs/breed.csv"))
                 {
@@ -291,6 +303,35 @@ public class ApiDbContextSeed
                             });
                         }
                         context.Providers.AddRange(entidad);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+            if(!context.Appoiments.Any())
+            {
+                using (var reader = new StreamReader("../Persistence/Data/Csvs/appoiment.csv"))
+                {
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+                    {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
+                        var list = csv.GetRecords<Appoiment>();
+                        List<Appoiment> entidad = new();
+                        foreach (var item in list)
+                        {
+                            entidad.Add(new Appoiment
+                            {
+                                Id = item.Id,
+                                PetId = item.PetId,
+                                ReasonId = item.ReasonId,
+                                VetId = item.VetId,
+                                Date = item.Date
+                            });
+                        }
+                        context.Appoiments.AddRange(entidad);
                         await context.SaveChangesAsync();
                     }
                 }
