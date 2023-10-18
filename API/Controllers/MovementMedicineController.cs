@@ -38,7 +38,7 @@ public class MovementMedicineController : ApiBaseController
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> Post([FromBody] MovementMedicine movDto)
+    public async Task<ActionResult> Post([FromBody] MovementMedicineDto movDto)
     {
         var mov = _mapper.Map<MovementMedicine>(movDto);
         var result =await _unitOfWork.MovementMedicines.RegisterAsync(mov);

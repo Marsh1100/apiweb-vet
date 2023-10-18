@@ -19,12 +19,12 @@ public class MovementMedicineRepository : GenericRepository<MovementMedicine>, I
     {
         string strDate= model.Date.ToString("yyyy-MM-ddTHH:mm:ss.ffffffZ");
         
-        var type = await _context.MovementTypes.Where(p=> p.Id == model.Id).FirstAsync();
+        var type = await _context.MovementTypes.Where(p=> p.Id == model.MovementTypeId).FirstAsync();
         if (DateTime.TryParseExact(strDate, "yyyy-MM-ddTHH:mm:ss.ffffffZ", null, DateTimeStyles.None, out DateTime parseDate))
         {
             var medicineUpdate = await _context.Medicines.Where(p=> p.Id == model.MedicineId).FirstAsync();
 
-            if(type.Name.ToUpper() == "Compra")
+            if(type.Name.ToLower() == "compra")
             {
                 var newMovement = new MovementMedicine
                 {
@@ -44,7 +44,7 @@ public class MovementMedicineRepository : GenericRepository<MovementMedicine>, I
                 await _context.SaveChangesAsync();
                 return "Compra de medicamentos realizada con éxito!";
 
-            }else if(type.Name.ToUpper() == "Venta")
+            }else if(type.Name.ToLower() == "venta")
             {
                 if(medicineUpdate.Stock>= model.Quantity)
                 {
