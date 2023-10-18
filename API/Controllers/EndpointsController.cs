@@ -118,7 +118,19 @@ public class EndpointsController : ApiBaseController
         return Ok(pets);
     }
     //8.
-    //9.
+    //9.Lista de las mascotas que fueron atendidas por un determinado veterinario.
+    [HttpGet("petsByVeterinarian/{id}")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult> GetPetsByVeterinarian(int id)
+    {
+        var pets =await _unitOfWork.Pets.GetPetsByVeterinarian(id);
+        var petsDto = _mapper.Map<IEnumerable<PetsAppoimentDto>>(pets);
+
+        return Ok(petsDto);
+    }
     //10.Lista de los proveedores que me venden un determinado medicamento.
     [HttpGet("providersByMedicine/{id}")]
     [MapToApiVersion("1.0")]

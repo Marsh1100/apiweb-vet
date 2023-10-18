@@ -144,4 +144,19 @@ public class PetRepository : GenericRepository<Pet>, IPet
         return petsAppoiment;
 
     }
+
+    public async Task<IEnumerable<Appoiment>> GetPetsByVeterinarian(int id)
+    {
+        var pets = await _context.Pets
+                    .Include(p=> p.Appoiments)
+                    .Include(p=> p.Breed)
+                    .ToListAsync();
+        var appoiments = await _context.Appoiments.ToListAsync();
+
+        var petsAppoiment = from appoiment in appoiments
+                            join pet in pets on appoiment.PetId equals pet.Id
+                            where appoiment.VetId == id
+                            select appoiment;
+        return petsAppoiment;
+    }
 }
