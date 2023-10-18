@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos;
+using API.Helpers;
 using API.Services;
 using AutoMapper;
 using Domain.Entities;
@@ -35,6 +36,16 @@ public class ProviderController : ApiBaseController
     {
         var providers = await _unitOfWork.Providers.GetAllAsync();
         return _mapper.Map<List<ProviderDto>>(providers);
+    }
+    [HttpGet]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<ProviderDto>>> GetPagination([FromQuery] Params p)
+    {
+        var providers = await _unitOfWork.Providers.GetAllAsync(p.PageIndex, p.PageSize, p.Search);
+        var providerDto = _mapper.Map<List<ProviderDto>>(providers.registros);
+        return  new Pager<ProviderDto>(providerDto,providers.totalRegistros, p.PageIndex, p.PageSize, p.Search);
     }
 
     [HttpPost()]

@@ -21,6 +21,20 @@ public class ProviderRepository : GenericRepository<Provider>, IProvider
             .FirstOrDefaultAsync(p => p.Id == id);
 
     }
+    public override async Task<(int totalRegistros, IEnumerable<Provider> registros)> GetAllAsync(int pageIndex, int pageSize, string search)
+    {
+        var query = _context.Providers as IQueryable<Provider>;
+        if(!string.IsNullOrEmpty(search))
+        {
+            query = query.Where(p=>p.Name.ToLower().Contains(search));
+        }
+        var totalRegistros = await query.CountAsync();
+        var registros = await query 
+                            .Skip((pageIndex-1)*pageSize)
+                            .Take(pageSize)
+                            .ToListAsync();
+        return (totalRegistros, registros);
+    }
 
     public async Task<IEnumerable<Provider>> GetProvidersByMedicine(int id)
     {
