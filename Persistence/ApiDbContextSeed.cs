@@ -56,6 +56,61 @@ public class ApiDbContextSeed
         }
         try
         {
+            if(!context.Users.Any())
+            {
+                using (var reader = new StreamReader("../Persistence/Data/Csvs/user.csv"))
+                {
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+                    {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
+                        var list = csv.GetRecords<User>();
+                        List<User> entidad = new();
+                        foreach (var item in list)
+                        {
+                            entidad.Add(new User
+                            {
+                                Id = item.Id,
+                                IdenNumber = item.IdenNumber,
+                                UserName=item.UserName,
+                                Email = item.Email,
+                                Password = item.Password
+                            });
+                        }
+                        context.Users.AddRange(entidad);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+            if(!context.UserRoles.Any())
+            {
+                using (var reader = new StreamReader("../Persistence/Data/Csvs/userrol.csv"))
+                {
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+                    {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
+                        var list = csv.GetRecords<UserRol>();
+                        List<UserRol> entidad = new();
+                        foreach (var item in list)
+                        {
+                            entidad.Add(new UserRol
+                            {
+                                UserId= item.UserId,
+                                RolId = item.RolId
+                            });
+                        }
+                        context.UserRoles.AddRange(entidad);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
             if(!context.Specialities.Any())
             {
                 using (var reader = new StreamReader("../Persistence/Data/Csvs/speciality.csv"))
@@ -168,7 +223,89 @@ public class ApiDbContextSeed
                     }
                 }
             }
-
+            if(!context.Providers.Any())
+            {
+                using (var reader = new StreamReader("../Persistence/Data/Csvs/provider.csv"))
+                {
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+                    {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
+                        var list = csv.GetRecords<Provider>();
+                        List<Provider> entidad = new();
+                        foreach (var item in list)
+                        {
+                            entidad.Add(new Provider
+                            {
+                                Id = item.Id,
+                                Name = item.Name,
+                                Address = item.Address
+                            });
+                        }
+                        context.Providers.AddRange(entidad);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+            if(!context.MedicineProviders.Any())
+            {
+                using (var reader = new StreamReader("../Persistence/Data/Csvs/medicineProvider.csv"))
+                {
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+                    {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
+                        var list = csv.GetRecords<MedicineProvider>();
+                        List<MedicineProvider> entidad = new();
+                        foreach (var item in list)
+                        {
+                            entidad.Add(new MedicineProvider
+                            {
+                                MedicineId = item.MedicineId,
+                                ProviderId = item.ProviderId
+                            });
+                        }
+                        context.MedicineProviders.AddRange(entidad);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+            if(!context.MovementMedicines.Any())
+            {
+                using (var reader = new StreamReader("../Persistence/Data/Csvs/movementMedicine.csv"))
+                {
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+                    {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
+                        var list = csv.GetRecords<MovementMedicine>();
+                        List<MovementMedicine> entidad = new();
+                        foreach (var item in list)
+                        {
+                            entidad.Add(new MovementMedicine
+                            {
+                                MedicineId = item.MedicineId,
+                                Date = item.Date,
+                                MovementTypeId = item.MovementTypeId,
+                                Quantity = item.Quantity,
+                                UnitPrice = item.UnitPrice,
+                                Price = item.Price
+                            });
+                        }
+                        context.MovementMedicines.AddRange(entidad);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
             if(!context.SpeciesP.Any())
             {
                 using (var reader = new StreamReader("../Persistence/Data/Csvs/species.csv"))
@@ -223,7 +360,6 @@ public class ApiDbContextSeed
                     }
                 }
             }
-
             if(!context.Breeds.Any())
             {
                 using (var reader = new StreamReader("../Persistence/Data/Csvs/breed.csv"))
@@ -280,33 +416,7 @@ public class ApiDbContextSeed
                     }
                 }
             }
-            if(!context.Providers.Any())
-            {
-                using (var reader = new StreamReader("../Persistence/Data/Csvs/provider.csv"))
-                {
-                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
-                    {
-                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
-                        MissingFieldFound = null
-                    }))
-                    {
-                        // Resto de tu código para leer y procesar el archivo CSV
-                        var list = csv.GetRecords<Provider>();
-                        List<Provider> entidad = new();
-                        foreach (var item in list)
-                        {
-                            entidad.Add(new Provider
-                            {
-                                Id = item.Id,
-                                Name = item.Name,
-                                Address = item.Address
-                            });
-                        }
-                        context.Providers.AddRange(entidad);
-                        await context.SaveChangesAsync();
-                    }
-                }
-            }
+            
             if(!context.Appoiments.Any())
             {
                 using (var reader = new StreamReader("../Persistence/Data/Csvs/appoiment.csv"))
