@@ -62,6 +62,12 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.Breed, origen=> origen.MapFrom(origen => origen.Breed.Name))
             .ForMember(dest => dest.Species, origen=> origen.MapFrom(origen => origen.Breed.Species.Name))
             .ReverseMap();
+        CreateMap<Appoiment, PetsAppoimentDto>()
+            .ForMember(dest => dest.Id, origen=> origen.MapFrom(origen => origen.Pet.Id))
+            .ForMember(dest => dest.Name, origen=> origen.MapFrom(origen => origen.Pet.Name))
+            .ForMember(dest => dest.Breed, origen=> origen.MapFrom(origen => origen.Pet.Breed.Name))
+            .ForMember(dest => dest.Birthdate, origen=> origen.MapFrom(origen => origen.Pet.Birthdate))
+            .ReverseMap();
 
     }   
 }

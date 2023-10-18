@@ -13,5 +13,6 @@ public interface IPet : IGenericRepository<Pet>
     Task<IEnumerable<object>> GetPetsBySpecie();
     Task<IEnumerable<Pet>> GetOwnerPetsByBreed(int id);
     Task<IEnumerable<object>> GetQuantityPets();
+    Task<IEnumerable<Appoiment>> GetPetsByAppoiment(int quarter);
 
 }

@@ -92,7 +92,19 @@ public class EndpointsController : ApiBaseController
 
         return Ok(medicineDto);
     }
+    //6.Lista de las mascotas que fueron atendidas por motivo de vacunacion en el primer trimestre del 2023
+    [HttpGet("petsByAppoiment/{quarter}")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
+    public async Task<ActionResult> GetPetsByAppoiment(int quarter)
+    {
+        var pets =await _unitOfWork.Pets.GetPetsByAppoiment(quarter);
+        var petsDto = _mapper.Map<IEnumerable<PetsAppoimentDto>>(pets);
+
+        return Ok(petsDto);
+    }
     //7.Lista de todas las mascotas agrupadas por especie.
     [HttpGet("petsBySpecies")]
     [MapToApiVersion("1.0")]
@@ -105,7 +117,8 @@ public class EndpointsController : ApiBaseController
 
         return Ok(pets);
     }
-
+    //8.
+    //9.
     //10.Lista de los proveedores que me venden un determinado medicamento.
     [HttpGet("providersByMedicine/{id}")]
     [MapToApiVersion("1.0")]

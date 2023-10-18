@@ -37,3 +37,12 @@ public class PetsOwnerDto
     public DateTime Birthdate { get; set; }
 }
 
+public class PetsAppoimentDto
+{
+    public int Id { get; set; }
+    public DateTime Date  {get; set;}
+    public string Name { get; set; }
+    public string Breed { get; set; }  
+    public DateTime Birthdate { get; set; }
+
+}

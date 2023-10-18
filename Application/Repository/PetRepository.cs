@@ -111,4 +111,37 @@ public class PetRepository : GenericRepository<Pet>, IPet
                         });
         return petsBreed;
     }
+
+    public async Task<IEnumerable<Appoiment>> GetPetsByAppoiment(int quarter)
+    {
+        if (quarter <= 0 || quarter >= 5)
+        {
+            return null;
+        }
+        int init = 1;
+        switch (quarter)
+        {
+            case 1: init = 1; break;
+            case 2: init = 4; break;
+            case 3: init = 7; break;
+            case 4: init = 10; break;
+            default:
+                break;
+        }
+        DateTime dateStart = new(2023, init, 1);
+        DateTime dateEnd = dateStart.AddMonths(3);
+
+        var pets = await _context.Pets
+                    .Include(p=> p.Appoiments)
+                    .Include(p=> p.Breed)
+                    .ToListAsync();
+        var appoiments = await _context.Appoiments.ToListAsync();
+
+        var petsAppoiment = from appoiment in appoiments
+                            join pet in pets on appoiment.PetId equals pet.Id
+                            where appoiment.Date>=dateStart && appoiment.Date<=dateEnd
+                            select appoiment;
+        return petsAppoiment;
+
+    }
 }
