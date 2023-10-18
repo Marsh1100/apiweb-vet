@@ -6,6 +6,7 @@ using API.Dtos;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -26,6 +27,7 @@ public class EndpointsController : ApiBaseController
     //1. Visualización de los veterinarios cuya especialidad sea Cirugía vascular.
     [HttpGet("veterinariansBySpeciality/{id}")]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Administrator")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -40,6 +42,7 @@ public class EndpointsController : ApiBaseController
     //2. Lista de los medicamentos que pertenezcan a el laboratorio Genfar.
     [HttpGet("medicinesByLaboratory/{id}")]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Employee, Administrator")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
