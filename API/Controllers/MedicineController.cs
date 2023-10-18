@@ -7,6 +7,7 @@ using API.Helpers;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -94,4 +95,32 @@ public class MedicineController : ApiBaseController
         return NoContent();
     }
 
+    //2. Lista de los medicamentos que pertenezcan a el laboratorio Genfar.
+    [HttpGet("medicinesByLaboratory/{id}")]
+    [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Employee, Administrator")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult> GetMedicinesByLaboratory(int id)
+    {
+        var medicines =await _unitOfWork.Medicines.GetMedicinesByLaboratory(id);
+        var medicinesDto = _mapper.Map<IEnumerable<MedicineBaseDto>>(medicines);
+
+        return Ok(medicinesDto);
+    }
+
+    //5.Lista de los medicamentos que tenga un precio de venta mayor a 50000.
+    [HttpGet("medicinesPrice/{price}")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult> GetMedicinesPrice(double price)
+    {
+        var medicine =await _unitOfWork.Medicines.GetMedicinesPrice(price);
+        var medicineDto = _mapper.Map<IEnumerable<MedicinePriceDto>>(medicine);
+
+        return Ok(medicineDto);
+    }
 }

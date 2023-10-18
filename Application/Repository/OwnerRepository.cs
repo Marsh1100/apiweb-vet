@@ -30,7 +30,7 @@ public class OwnerRepository : GenericRepository<Owner>, IOwner
     public async Task<IEnumerable<Owner>> GetOwnerPets()
     {
         var ownerPets = await _context.Owners
-                        .Include(p=> p.Pets).ThenInclude(d=> d.Breed)
+                        .Include(p=> p.Pets).ThenInclude(d=> d.Breed).ThenInclude(d=>d.Species)
                         .ToListAsync();
         return ownerPets;
     }

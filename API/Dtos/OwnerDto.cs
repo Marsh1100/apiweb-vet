@@ -24,5 +24,5 @@ public class OwnerPetsDto
     public string Name { get; set; }
     public string Email { get; set; }
     public string Phone { get; set; }
-    public List<PetsOnlyDto> Pets {get; set; }
+    public List<PetsOwnerDto> Pets {get; set; }
 }

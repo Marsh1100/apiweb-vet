@@ -110,4 +110,18 @@ public class ProviderController : ApiBaseController
         return Ok(result);
     }
 
+     //10.Lista de los proveedores que me venden un determinado medicamento.
+    [HttpGet("providersByMedicine/{id}")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<Provider>> GetProvidersByMedicine(int id)
+    {
+        var provider =await _unitOfWork.Providers.GetProvidersByMedicine(id);
+        var providerDto = _mapper.Map<IEnumerable<ProviderDto>>(provider);
+
+        return Ok(providerDto);
+    }
+
 }

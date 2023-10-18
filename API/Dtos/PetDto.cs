@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace API.Dtos;
 
 public class PetDto
+
 {
     public int Id { get; set; }
     [Required]
@@ -19,6 +20,7 @@ public class PetDto
     public DateTime Birthdate { get; set; }
 
 }
+
 public class PetsOnlyDto
 {
     public int Id { get; set; }
@@ -41,7 +43,7 @@ public class PetsOwnerDto
 public class PetsAppoimentDto
 {
     public int Id { get; set; }
-    public DateTime Date  {get; set;}
+    public DateTime DateAppoiment  {get; set;}
     public string Name { get; set; }
     public string Breed { get; set; }  
     public DateTime Birthdate { get; set; }

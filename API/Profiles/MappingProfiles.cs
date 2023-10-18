@@ -68,6 +68,7 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.Name, origen=> origen.MapFrom(origen => origen.Pet.Name))
             .ForMember(dest => dest.Breed, origen=> origen.MapFrom(origen => origen.Pet.Breed.Name))
             .ForMember(dest => dest.Birthdate, origen=> origen.MapFrom(origen => origen.Pet.Birthdate))
+            .ForMember(dest => dest.DateAppoiment, origen=> origen.MapFrom(origen => origen.Date))
             .ReverseMap();
         
         CreateMap<Provider, ProviderAllDto>()

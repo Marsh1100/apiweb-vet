@@ -56,6 +56,17 @@ public class MovementMedicineController : ApiBaseController
         return Ok(result);
     }
 
-    
+    //8.Lista de todos los movimientos de medicamentos y el valor total de cada movimiento.
+    [HttpGet("movementMedicines")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult> GetMovementMedicines()
+    {
+        var mov =await _unitOfWork.MovementMedicines.GetMovementMedicines();
+
+        return Ok(mov);
+    }
 
 }

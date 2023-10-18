@@ -7,6 +7,7 @@ using API.Helpers;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -94,5 +95,21 @@ public class VetController : ApiBaseController
         this._unitOfWork.Veterinarians.Remove(vet);
         await this._unitOfWork.SaveAsync();
         return NoContent();
+    }
+
+    //Endpoint
+    //1. Visualización de los veterinarios cuya especialidad sea Cirugía vascular.
+    [HttpGet("veterinariansBySpeciality/{id}")]
+    [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Administrator")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult> GetVeterinariansBySpecialty(int id)
+    {
+        var veterinarians =await _unitOfWork.Veterinarians.GetVeterinariansBySpecialty(id);
+        var veterinariansDto = _mapper.Map<IEnumerable<VetSpecialityDto>>(veterinarians);
+
+        return Ok(veterinariansDto);
     }
 }

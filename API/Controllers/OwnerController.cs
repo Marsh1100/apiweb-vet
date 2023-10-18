@@ -95,4 +95,18 @@ public class OwnerController : ApiBaseController
         return NoContent();
     }
 
+    //4.Lista de los propietarios y sus mascotas.
+    [HttpGet("ownerPets")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult> GetOwnerPets()
+    {
+        var pets =await _unitOfWork.Owners.GetOwnerPets();
+        var petsDto = _mapper.Map<IEnumerable<OwnerPetsDto>>(pets);
+
+        return Ok(petsDto);
+    }
+
 }
