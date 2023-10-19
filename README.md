@@ -135,5 +135,36 @@ http://localhost:5076/api/Laboratory?ver=1.1&search=Genfar
      ```
      ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/540431be-a6f1-468c-81da-f8bafb87a30c)
      Endpoint para cualquier trimestre del 2023: ```http://localhost:5076/api/Pet/petsByAppoiment/{id}``` <br><br>
+7. Lista de todas las mascotas agrupadas por especie.
+     ```
+        http://localhost:5076/api/Pet/petsBySpecies
+     ```
+     ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/c803f3ae-3e14-47d5-8688-795977cb2ac2)  <br><br>
+8. Lista de todos los movimientos de medicamentos y el valor total de cada movimiento.  
+    ```
+        http://localhost:5076/api/MovementMedicine/movementMedicines
+    ```
+     ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/cd346358-00a0-45f3-b2fa-986edd28da77) <br><br>
+9. Lista de las mascotas que fueron atendidas por un determinado veterinario.
+    ```
+      http://localhost:5076/api/Pet/petsByVeterinarian/{id}
+    ```
+    ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/eae6a080-82f6-4b27-9133-9d8856322cc7) <br><br>
+10. Lista de los proveedores que me venden un determinado medicamento.
+    ```
+      http://localhost:5076/api/Provider/providersByMedicine/{id}
+    ```
+    ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/c3699845-0ea0-4e58-8bb2-dbdc2e00fef6) <br><br>
+11. Lista de las mascotas y sus propietarios cuya raza sea Golden Retriver.
+    ```
+      http://localhost:5076/api/Pet/OwnerPetsByBreed
+    ```
+    ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/9834f2d0-97f7-40d5-9128-f3b519622063)
+    Endpoint para cualquier raza: ```http://localhost:5076/api/Pet/OwnerPetsByBreed/{id}``` <br><br>
+12. Lista de la cantidad de mascotas que pertenecen a una raza.
+     ```
+      http://localhost:5076/api/Pet/quantityPets
+    ```
+    ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/da24413b-a1d0-49fb-a69d-71abdbcb94f5)
 
 
