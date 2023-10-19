@@ -1615,43 +1615,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "user",
-			"item": [
-				{
-					"name": "get",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:5076/api/User?ver=1.1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5076",
-							"path": [
-								"api",
-								"User"
-							],
-							"query": [
-								{
-									"key": "ver",
-									"value": "1.1"
-								},
-								{
-									"key": "search",
-									"value": "11",
-									"description": "Busqueda por número de documento",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
 		}
 	]
 }
