@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "cf4ac1e6-d692-4b9a-a3a4-9fb09ad31cec",
+		"_postman_id": "183280e5-0c09-498a-9667-3ee1d71954de",
 		"name": "vet",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "28473639"
 	},
 	"item": [
@@ -14,9 +14,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXJhMTEiLCJqdGkiOiIxZTBkZWVhZi01MzI3LTRmNzAtYWMyNC0zMTg2MDUyOTU0YjgiLCJlbWFpbCI6InNhcmFAZ21haWwuY29tIiwidWlkIjoiMSIsInJvbGVzIjoiQWRtaW5pc3RyYXRvciIsImV4cCI6MTY5NzY3ODQwNywiaXNzIjoiTXlTdG9yZUFwaSIsImF1ZCI6Ik15U3RvcmVBcGlVc2VyIn0.gWuNDX9713ZKPVpdrhporQMdofMz6bK_XGSLKDTcWjE"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXJhMTEiLCJqdGkiOiIxZTBkZWVhZi01MzI3LTRmNzAtYWMyNC0zMTg2MDUyOTU0YjgiLCJlbWFpbCI6InNhcmFAZ21haWwuY29tIiwidWlkIjoiMSIsInJvbGVzIjoiQWRtaW5pc3RyYXRvciIsImV4cCI6MTY5NzY3ODQwNywiaXNzIjoiTXlTdG9yZUFwaSIsImF1ZCI6Ik15U3RvcmVBcGlVc2VyIn0.gWuNDX9713ZKPVpdrhporQMdofMz6bK_XGSLKDTcWjE",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
@@ -48,9 +52,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXJhMTEiLCJqdGkiOiJjMmViZDYyNC0wMmFiLTQwMWEtYmVkZi03ZTVhMWYzNWI3NjQiLCJlbWFpbCI6InNhcmFAZ21haWwuY29tIiwidWlkIjoiMSIsInJvbGVzIjoiQWRtaW5pc3RyYXRvciIsImV4cCI6MTY5NzY2NjUxNCwiaXNzIjoiTXlTdG9yZUFwaSIsImF1ZCI6Ik15U3RvcmVBcGlVc2VyIn0.uJ1Emg-O5V_HuGYgO0NzUKWWhj-Y7sj4xE4Ba8OJmoU"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXJhMTEiLCJqdGkiOiJjMmViZDYyNC0wMmFiLTQwMWEtYmVkZi03ZTVhMWYzNWI3NjQiLCJlbWFpbCI6InNhcmFAZ21haWwuY29tIiwidWlkIjoiMSIsInJvbGVzIjoiQWRtaW5pc3RyYXRvciIsImV4cCI6MTY5NzY2NjUxNCwiaXNzIjoiTXlTdG9yZUFwaSIsImF1ZCI6Ik15U3RvcmVBcGlVc2VyIn0.uJ1Emg-O5V_HuGYgO0NzUKWWhj-Y7sj4xE4Ba8OJmoU",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
@@ -282,7 +290,20 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:5076/api/Provider/providersByMedicine/5"
+						"url": {
+							"raw": "http://localhost:5076/api/Provider/providersByMedicine/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Provider",
+								"providersByMedicine",
+								"5"
+							]
+						}
 					},
 					"response": []
 				},
@@ -291,7 +312,20 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:5076/api/Pet/OwnerPetsByBreed/2"
+						"url": {
+							"raw": "http://localhost:5076/api/Pet/OwnerPetsByBreed/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Pet",
+								"OwnerPetsByBreed",
+								"2"
+							]
+						}
 					},
 					"response": []
 				},
@@ -342,7 +376,19 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/User/register"
+						"url": {
+							"raw": "http://localhost:5076/api/User/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"User",
+								"register"
+							]
+						}
 					},
 					"response": []
 				},
@@ -360,7 +406,19 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/User/token"
+						"url": {
+							"raw": "http://localhost:5076/api/User/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"User",
+								"token"
+							]
+						}
 					},
 					"response": []
 				},
@@ -378,7 +436,19 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/User/addrole"
+						"url": {
+							"raw": "http://localhost:5076/api/User/addrole",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"User",
+								"addrole"
+							]
+						}
 					},
 					"response": []
 				},
@@ -396,7 +466,19 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/User/refresh-token"
+						"url": {
+							"raw": "http://localhost:5076/api/User/refresh-token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"User",
+								"refresh-token"
+							]
+						}
 					},
 					"response": []
 				}
@@ -419,7 +501,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Owner"
+						"url": {
+							"raw": "http://localhost:5076/api/Owner",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Owner"
+							]
+						}
 					},
 					"response": []
 				},
@@ -437,7 +530,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Owner"
+						"url": {
+							"raw": "http://localhost:5076/api/Owner",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Owner"
+							]
+						}
 					},
 					"response": []
 				},
@@ -448,14 +552,26 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"raw": " ",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Owner/5"
+						"url": {
+							"raw": "http://localhost:5076/api/Owner/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Owner",
+								"5"
+							]
+						}
 					},
 					"response": []
 				},
@@ -504,7 +620,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Appoiment"
+						"url": {
+							"raw": "http://localhost:5076/api/Appoiment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Appoiment"
+							]
+						}
 					},
 					"response": []
 				},
@@ -522,7 +649,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Appoiment"
+						"url": {
+							"raw": "http://localhost:5076/api/Appoiment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Appoiment"
+							]
+						}
 					},
 					"response": []
 				},
@@ -533,14 +671,26 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"raw": " ",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Appoiment/30"
+						"url": {
+							"raw": "http://localhost:5076/api/Appoiment/30",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Appoiment",
+								"30"
+							]
+						}
 					},
 					"response": []
 				},
@@ -594,7 +744,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Pet"
+						"url": {
+							"raw": "http://localhost:5076/api/Pet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Pet"
+							]
+						}
 					},
 					"response": []
 				},
@@ -612,7 +773,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Pet"
+						"url": {
+							"raw": "http://localhost:5076/api/Pet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Pet"
+							]
+						}
 					},
 					"response": []
 				},
@@ -623,14 +795,26 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"raw": " ",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Pet/1"
+						"url": {
+							"raw": "http://localhost:5076/api/Pet/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Pet",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -693,7 +877,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Vet"
+						"url": {
+							"raw": "http://localhost:5076/api/Vet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Vet"
+							]
+						}
 					},
 					"response": []
 				},
@@ -711,7 +906,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Vet"
+						"url": {
+							"raw": "http://localhost:5076/api/Vet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Vet"
+							]
+						}
 					},
 					"response": []
 				},
@@ -720,22 +926,38 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXJhMTEiLCJqdGkiOiJlOWEwYTVkYi01MzVkLTQ3YzctODAwZS1iM2FmMzY1YTYwNjkiLCJlbWFpbCI6InNhcmFAZ21haWwuY29tIiwidWlkIjoiMSIsInJvbGVzIjoiQWRtaW5pc3RyYXRvciIsImV4cCI6MTY5NzcwMTI3MywiaXNzIjoiTXlTdG9yZUFwaSIsImF1ZCI6Ik15U3RvcmVBcGlVc2VyIn0.A9K3rtG0B4RjKKoBSQ5jCp7sl0QwwLZeOLirkFRvl70"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXJhMTEiLCJqdGkiOiJlOWEwYTVkYi01MzVkLTQ3YzctODAwZS1iM2FmMzY1YTYwNjkiLCJlbWFpbCI6InNhcmFAZ21haWwuY29tIiwidWlkIjoiMSIsInJvbGVzIjoiQWRtaW5pc3RyYXRvciIsImV4cCI6MTY5NzcwMTI3MywiaXNzIjoiTXlTdG9yZUFwaSIsImF1ZCI6Ik15U3RvcmVBcGlVc2VyIn0.A9K3rtG0B4RjKKoBSQ5jCp7sl0QwwLZeOLirkFRvl70",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"raw": " ",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Vet/485"
+						"url": {
+							"raw": "http://localhost:5076/api/Vet/485",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Vet",
+								"485"
+							]
+						}
 					},
 					"response": []
 				},
@@ -788,7 +1010,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Reason"
+						"url": {
+							"raw": "http://localhost:5076/api/Reason",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Reason"
+							]
+						}
 					},
 					"response": []
 				},
@@ -806,7 +1039,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Reason"
+						"url": {
+							"raw": "http://localhost:5076/api/Reason",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Reason"
+							]
+						}
 					},
 					"response": []
 				},
@@ -817,14 +1061,26 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"raw": " ",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Reason/4"
+						"url": {
+							"raw": "http://localhost:5076/api/Reason/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Reason",
+								"4"
+							]
+						}
 					},
 					"response": []
 				},
@@ -877,7 +1133,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Species"
+						"url": {
+							"raw": "http://localhost:5076/api/Species",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Species"
+							]
+						}
 					},
 					"response": []
 				},
@@ -895,7 +1162,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Species"
+						"url": {
+							"raw": "http://localhost:5076/api/Species",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Species"
+							]
+						}
 					},
 					"response": []
 				},
@@ -906,14 +1184,26 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"raw": " ",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Species/10"
+						"url": {
+							"raw": "http://localhost:5076/api/Species/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Species",
+								"10"
+							]
+						}
 					},
 					"response": []
 				},
@@ -967,7 +1257,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Speciality"
+						"url": {
+							"raw": "http://localhost:5076/api/Speciality",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Speciality"
+							]
+						}
 					},
 					"response": []
 				},
@@ -985,7 +1286,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Speciality"
+						"url": {
+							"raw": "http://localhost:5076/api/Speciality",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Speciality"
+							]
+						}
 					},
 					"response": []
 				},
@@ -996,14 +1308,26 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"raw": " ",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Speciality/7"
+						"url": {
+							"raw": "http://localhost:5076/api/Speciality/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Speciality",
+								"7"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1061,7 +1385,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Breed"
+						"url": {
+							"raw": "http://localhost:5076/api/Breed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Breed"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1079,7 +1414,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Breed"
+						"url": {
+							"raw": "http://localhost:5076/api/Breed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Breed"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1090,14 +1436,26 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Reason/4"
+						"url": {
+							"raw": "http://localhost:5076/api/Reason/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Reason",
+								"4"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1155,7 +1513,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Laboratory"
+						"url": {
+							"raw": "http://localhost:5076/api/Laboratory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Laboratory"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1173,7 +1542,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Laboratory"
+						"url": {
+							"raw": "http://localhost:5076/api/Laboratory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Laboratory"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1184,14 +1564,26 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"raw": " ",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Laboratory/1"
+						"url": {
+							"raw": "http://localhost:5076/api/Laboratory/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Laboratory",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1240,7 +1632,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Medicine"
+						"url": {
+							"raw": "http://localhost:5076/api/Medicine",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Medicine"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1258,7 +1661,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Medicine"
+						"url": {
+							"raw": "http://localhost:5076/api/Medicine",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Medicine"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1269,14 +1683,26 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Medicine/12"
+						"url": {
+							"raw": "http://localhost:5076/api/Medicine/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Medicine",
+								"12"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1330,7 +1756,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Provider"
+						"url": {
+							"raw": "http://localhost:5076/api/Provider",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Provider"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1348,7 +1785,19 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Provider/addMedicine"
+						"url": {
+							"raw": "http://localhost:5076/api/Provider/addMedicine",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Provider",
+								"addMedicine"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1366,7 +1815,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Provider"
+						"url": {
+							"raw": "http://localhost:5076/api/Provider",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Provider"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1377,14 +1837,26 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"raw": " ",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/Provider/1"
+						"url": {
+							"raw": "http://localhost:5076/api/Provider/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Provider",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1437,7 +1909,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/MovementType"
+						"url": {
+							"raw": "http://localhost:5076/api/MovementType",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"MovementType"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1455,7 +1938,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/MovementType"
+						"url": {
+							"raw": "http://localhost:5076/api/MovementType",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"MovementType"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1466,14 +1960,26 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"raw": " ",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/MovementType/3"
+						"url": {
+							"raw": "http://localhost:5076/api/MovementType/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"MovementType",
+								"3"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1505,29 +2011,6 @@
 								}
 							]
 						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "appoiments",
-			"item": [
-				{
-					"name": "add",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"PetId\": 1,\r\n    \"Date\":\"2023-10-20\",\r\n    \"ReasonId\":1,\r\n    \"VetId\":1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:5076/api/Appoiment"
 					},
 					"response": []
 				}
@@ -1592,7 +2075,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/MovementMedicine"
+						"url": {
+							"raw": "http://localhost:5076/api/MovementMedicine",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"MovementMedicine"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1610,7 +2104,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:5076/api/MovementMedicine"
+						"url": {
+							"raw": "http://localhost:5076/api/MovementMedicine",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"MovementMedicine"
+							]
+						}
 					},
 					"response": []
 				}
