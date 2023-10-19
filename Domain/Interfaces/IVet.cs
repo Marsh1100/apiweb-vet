@@ -10,5 +10,7 @@ namespace Domain.Interfaces;
 public interface IVet : IGenericRepository<Vet> 
 {
     Task<IEnumerable<Vet>> GetVeterinariansBySpecialty(int id);
+    Task<IEnumerable<Vet>> GetVeterinariansBySpecialty();
+
 }
 

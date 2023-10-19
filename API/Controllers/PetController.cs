@@ -89,11 +89,22 @@ public class PetController : ApiBaseController
         return NoContent();
     }
     //3. Mascotas que se encuentren registradas cuya especie sea felina.
+    [HttpGet("petBySpecie")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> GetPetBySpecie()
+    {
+        var pets =await _unitOfWork.Pets.GetPetBySpecie();
+        var petsDto = _mapper.Map<IEnumerable<PetsOnlyDto>>(pets);
+
+        return Ok(petsDto);
+    }
+    //3.1 Mascotas que se encuentren registradas de una especie.
     [HttpGet("petBySpecie/{id}")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-
     public async Task<ActionResult> GetPetBySpecie(int id)
     {
         var pets =await _unitOfWork.Pets.GetPetBySpecie(id);
@@ -102,12 +113,24 @@ public class PetController : ApiBaseController
         return Ok(petsDto);
     }
 
-    //6.Lista de las mascotas que fueron atendidas por motivo de vacunacion en el primer trimestre del 2023
+
+    //6.1 Lista de las mascotas que fueron atendidas por motivo de vacunacion en el primer trimestre del 2023
+    [HttpGet("petsByAppoiment")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> GetPetsByAppoiment()
+    {
+        var pets =await _unitOfWork.Pets.GetPetsByAppoiment();
+        var petsDto = _mapper.Map<IEnumerable<PetsAppoimentDto>>(pets);
+
+        return Ok(petsDto);
+    }
+    //6.Lista de las mascotas que fueron atendidas por motivo de vacunacion en cualquier trimestre del 2023
     [HttpGet("petsByAppoiment/{quarter}")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-
     public async Task<ActionResult> GetPetsByAppoiment(int quarter)
     {
         var pets =await _unitOfWork.Pets.GetPetsByAppoiment(quarter);
@@ -121,19 +144,17 @@ public class PetController : ApiBaseController
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-
     public async Task<ActionResult> GetPetsBySpecie()
     {
         var pets =await _unitOfWork.Pets.GetPetsBySpecie();
 
         return Ok(pets);
     }
-     //9.Lista de las mascotas que fueron atendidas por un determinado veterinario.
+    //9.Lista de las mascotas que fueron atendidas por un determinado veterinario.
     [HttpGet("petsByVeterinarian/{id}")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-
     public async Task<ActionResult> GetPetsByVeterinarian(int id)
     {
         var pets =await _unitOfWork.Pets.GetPetsByVeterinarian(id);
@@ -143,6 +164,19 @@ public class PetController : ApiBaseController
     }
 
     //11.Lista de las mascotas y sus propietarios cuya raza sea Golden Retriver
+    [HttpGet("ownerPetsByBreed")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult> GetOwnerPetsByBreed()
+    {
+        var pets =await _unitOfWork.Pets.GetOwnerPetsByBreed();
+        var petsDto = _mapper.Map<IEnumerable<PetsOwnerDto>>(pets);
+
+        return Ok(petsDto);
+    }
+    //11.1 Lista de las mascotas y sus propietarios según una raza
     [HttpGet("ownerPetsByBreed/{id}")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]

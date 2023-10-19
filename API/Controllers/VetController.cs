@@ -99,6 +99,21 @@ public class VetController : ApiBaseController
 
     //Endpoint
     //1. Visualización de los veterinarios cuya especialidad sea Cirugía vascular.
+    [HttpGet("veterinariansBySpeciality")]
+    [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Administrator")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult> GetVeterinariansBySpecialty()
+    {
+        var veterinarians =await _unitOfWork.Veterinarians.GetVeterinariansBySpecialty();
+        var veterinariansDto = _mapper.Map<IEnumerable<VetSpecialityDto>>(veterinarians);
+
+        return Ok(veterinariansDto);
+    }
+
+    //1.1 Visualización de los veterinarios por especialidad.
     [HttpGet("veterinariansBySpeciality/{id}")]
     [MapToApiVersion("1.0")]
     [Authorize(Roles = "Administrator")]

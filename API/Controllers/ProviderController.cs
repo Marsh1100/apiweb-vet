@@ -110,7 +110,7 @@ public class ProviderController : ApiBaseController
         return Ok(result);
     }
 
-     //10.Lista de los proveedores que me venden un determinado medicamento.
+    //10.Lista de los proveedores que me venden un determinado medicamento.
     [HttpGet("providersByMedicine/{id}")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]

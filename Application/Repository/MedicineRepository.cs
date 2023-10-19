@@ -36,11 +36,28 @@ public class MedicineRepository : GenericRepository<Medicine>, IMedicine
         }
         return null;
     }
+    public async Task<IEnumerable<Medicine>> GetMedicinesByLaboratory()
+    {
+        var medicines = await _context.Medicines.Where(p=> p.Laboratory.Name == "Genfar").ToListAsync();
+        if(medicines.Any())
+        {
+            return medicines;
+        }
+        return null;
+    }
 
     public async Task<IEnumerable<Medicine>> GetMedicinesPrice(double price)
     {
         var medicines  = await _context.Medicines
                         .Where(p=> p.Price >= price)
+                        .Include(p=>p.Laboratory)
+                        .ToListAsync();
+        return medicines;
+    }
+    public async Task<IEnumerable<Medicine>> GetMedicinesPrice()
+    {
+        var medicines  = await _context.Medicines
+                        .Where(p=> p.Price >= 50000)
                         .Include(p=>p.Laboratory)
                         .ToListAsync();
         return medicines;

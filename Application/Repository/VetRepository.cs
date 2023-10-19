@@ -40,4 +40,16 @@ public class VetRepository : GenericRepository<Vet>, IVet
         }
         return null;
     }
+    public async Task<IEnumerable<Vet>> GetVeterinariansBySpecialty()
+    {
+
+        var vet = await _context.Veterinarians
+                        .Where(p=> p.Speciality.Name == "Cirugía vascular")
+                        .ToListAsync();
+        if (vet.Any())
+        {
+            return vet;
+        }
+        return null;
+    }
 }

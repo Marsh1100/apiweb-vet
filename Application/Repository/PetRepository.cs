@@ -28,7 +28,6 @@ public class PetRepository : GenericRepository<Pet>, IPet
                             .ToListAsync();
         return (totalRegistros, registros);
     }
-
     public async Task<string> RegisterAsync(Pet modelPet)
     {
         string strDate= modelPet.Birthdate.ToString("yyyy-MM-ddTHH:mm:ss.ffffffZ");
@@ -54,7 +53,7 @@ public class PetRepository : GenericRepository<Pet>, IPet
     }
     public async Task<IEnumerable<Pet>> GetPetBySpecie(int id)
     {
-        var pets =await _context.Pets.ToListAsync();
+        var pets =await _context.Pets.Include(p=>p.Owner).ToListAsync();
         var breeds = await _context.Breeds.ToListAsync();
         var speciesP = await _context.SpeciesP.ToListAsync();
         
@@ -62,6 +61,19 @@ public class PetRepository : GenericRepository<Pet>, IPet
                         join breed in breeds on pet.BreedId equals breed.Id
                         join species in speciesP on breed.SpeciesId equals species.Id
                         where species.Id == id
+                        select pet;
+        return petsBreed;
+    }
+    public async Task<IEnumerable<Pet>> GetPetBySpecie()
+    {
+        var pets =await _context.Pets.Include(p=>p.Owner).ToListAsync();
+        var breeds = await _context.Breeds.ToListAsync();
+        var speciesP = await _context.SpeciesP.ToListAsync();
+        
+        var petsBreed = from pet in pets
+                        join breed in breeds on pet.BreedId equals breed.Id
+                        join species in speciesP on breed.SpeciesId equals species.Id
+                        where species.Name.ToLower() == "felina"
                         select pet;
         return petsBreed;
     }
@@ -99,6 +111,18 @@ public class PetRepository : GenericRepository<Pet>, IPet
         var petResult = from pet in pets
                         join breed in breeds on pet.BreedId equals breed.Id
                         where breed.Id == id
+                        select pet;
+        return petResult;
+    }
+    public async Task<IEnumerable<Pet>> GetOwnerPetsByBreed()
+    {
+        var pets =await _context.Pets.ToListAsync();
+        var breeds = await _context.Breeds.ToListAsync();
+        var speciesP = await _context.SpeciesP.ToListAsync();
+        
+        var petResult = from pet in pets
+                        join breed in breeds on pet.BreedId equals breed.Id
+                        where breed.Name == "Golden Retriver"
                         select pet;
         return petResult;
     }
@@ -156,6 +180,23 @@ public class PetRepository : GenericRepository<Pet>, IPet
                             select appoiment;
         return petsAppoiment;
 
+    }
+    public async Task<IEnumerable<Appoiment>> GetPetsByAppoiment()
+    {
+        DateTime dateStart = new(2023, 1, 1);
+        DateTime dateEnd = dateStart.AddMonths(3);
+
+        var pets = await _context.Pets
+                    .Include(p=> p.Appoiments)
+                    .Include(p=> p.Breed)
+                    .ToListAsync();
+        var appoiments = await _context.Appoiments.ToListAsync();
+
+        var petsAppoiment = from appoiment in appoiments
+                            join pet in pets on appoiment.PetId equals pet.Id
+                            where appoiment.Date>=dateStart && appoiment.Date<=dateEnd
+                            select appoiment;
+        return petsAppoiment;
     }
 
     public async Task<IEnumerable<Appoiment>> GetPetsByVeterinarian(int id)
