@@ -80,7 +80,7 @@ Ejemplo al intentar acceder más de 3 veces en 10 segundos a la lista de propiet
 Se realizó la paginación en las peticiones get de los controladores en la version 1.1.<br>
 Para el versionado se puede realizar mediante la query.  
 ```
-http://localhost:5076/api/Owner?ver=1.1 
+http://localhost:5076/api/Owner?ver=1.1
 ```
 ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/46c52227-a620-4c68-8818-736a3be8c585)<br>
 O mediante los headers. 
@@ -102,68 +102,68 @@ http://localhost:5076/api/Laboratory?ver=1.1&search=Genfar
 ## Ejecutando las consultas ⚙️📚
 1. Visualización de los veterinarios cuya especialidad sea cirugía vascular.
     ```
-      http://localhost:5076/api/Vet/veterinariansBySpeciality
+    http://localhost:5076/api/Vet/veterinariansBySpeciality
     ```
    ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/52e48842-66f9-47a2-bb30-48968deabad6)
    Endpoint para cualquier especialidad: ```http://localhost:5076/api/Vet/veterinariansBySpeciality/{id}``` <br><br>
 3. Lista de los medicamentos que pertenezcan a el laboratorio Genfar.
     ```
-      http://localhost:5076/api/Medicine/medicinesByLaboratory
+    http://localhost:5076/api/Medicine/medicinesByLaboratory
     ```
     ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/4223e8c9-de8e-44a1-8242-8a4692f38511)
     Endpoint para cualquier laboratorio: ```http://localhost:5076/api/Medicine/medicinesByLaboratory/{id}``` <br><br>
 3. Mascotas que se encuentren registradas cuya especie sea felina.
     ```
-      http://localhost:5076/api/Pet/petBySpecie
+    http://localhost:5076/api/Pet/petBySpecie
     ```
     ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/c4ba6e96-4c28-4d58-a682-2775c098030c)
     Endpoint para cualquier especie: ```http://localhost:5076/api/Pet/petBySpecie/{id}``` <br><br>
 4. Lista de los propietarios y sus mascotas.
     ```
-      http://localhost:5076/api/Owner/ownerPets
+    http://localhost:5076/api/Owner/ownerPets
     ```
     ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/b20c64cc-0fe7-4d87-8cf3-e7ed66c1fbef) <br><br>
 5. Lista de los medicamentos que tenga un precio de venta mayor a 50000.
     ```
-      http://localhost:5076/api/Medicine/medicinesPrice
+    http://localhost:5076/api/Medicine/medicinesPrice
     ```
     ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/05422b2c-45c0-45d6-9fca-0fd3a2ec11aa)
     Endpoint para cualquier precio de venta: ```http://localhost:5076/api/Medicine/medicinesPrice/{price}``` <br><br>
 6. Lista de las mascotas que fueron atendidas por motivo de vacunacion en el primer trimestre del 2023.
      ```
-        http://localhost:5076/api/Pet/petsByAppoiment
+     http://localhost:5076/api/Pet/petsByAppoiment
      ```
      ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/540431be-a6f1-468c-81da-f8bafb87a30c)
      Endpoint para cualquier trimestre del 2023: ```http://localhost:5076/api/Pet/petsByAppoiment/{quarter}``` <br><br>
 7. Lista de todas las mascotas agrupadas por especie.
      ```
-        http://localhost:5076/api/Pet/petsBySpecies
+     http://localhost:5076/api/Pet/petsBySpecies
      ```
      ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/c803f3ae-3e14-47d5-8688-795977cb2ac2)  <br><br>
 8. Lista de todos los movimientos de medicamentos y el valor total de cada movimiento.  
     ```
-        http://localhost:5076/api/MovementMedicine/movementMedicines
+    http://localhost:5076/api/MovementMedicine/movementMedicines
     ```
      ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/cd346358-00a0-45f3-b2fa-986edd28da77) <br><br>
 9. Lista de las mascotas que fueron atendidas por un determinado veterinario.
     ```
-      http://localhost:5076/api/Pet/petsByVeterinarian/{id}
+    http://localhost:5076/api/Pet/petsByVeterinarian/{id}
     ```
     ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/eae6a080-82f6-4b27-9133-9d8856322cc7) <br><br>
 10. Lista de los proveedores que me venden un determinado medicamento.
     ```
-      http://localhost:5076/api/Provider/providersByMedicine/{id}
+    http://localhost:5076/api/Provider/providersByMedicine/{id}
     ```
     ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/c3699845-0ea0-4e58-8bb2-dbdc2e00fef6) <br><br>
 11. Lista de las mascotas y sus propietarios cuya raza sea Golden Retriver.
     ```
-      http://localhost:5076/api/Pet/OwnerPetsByBreed
+    http://localhost:5076/api/Pet/OwnerPetsByBreed
     ```
     ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/9834f2d0-97f7-40d5-9128-f3b519622063)
     Endpoint para cualquier raza: ```http://localhost:5076/api/Pet/OwnerPetsByBreed/{id}``` <br><br>
 12. Lista de la cantidad de mascotas que pertenecen a una raza.
      ```
-      http://localhost:5076/api/Pet/quantityPets
+     http://localhost:5076/api/Pet/quantityPets
     ```
     ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/da24413b-a1d0-49fb-a69d-71abdbcb94f5)
 
