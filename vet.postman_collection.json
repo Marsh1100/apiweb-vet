@@ -1107,7 +1107,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5076/api/Species?ver=1.1&pageSize=10",
+							"raw": "http://localhost:5076/api/Breed?ver=1.1&pageSize=10",
 							"protocol": "http",
 							"host": [
 								"localhost"
