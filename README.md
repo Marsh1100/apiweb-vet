@@ -128,13 +128,13 @@ http://localhost:5076/api/Laboratory?ver=1.1&search=Genfar
       http://localhost:5076/api/Medicine/medicinesPrice
     ```
     ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/05422b2c-45c0-45d6-9fca-0fd3a2ec11aa)
-    Endpoint para cualquier precio de venta: ```http://localhost:5076/api/Medicine/medicinesPrice/{id}``` <br><br>
+    Endpoint para cualquier precio de venta: ```http://localhost:5076/api/Medicine/medicinesPrice/{price}``` <br><br>
 6. Lista de las mascotas que fueron atendidas por motivo de vacunacion en el primer trimestre del 2023.
      ```
         http://localhost:5076/api/Pet/petsByAppoiment
      ```
      ![image](https://github.com/Marsh1100/apiweb-vet/assets/131481951/540431be-a6f1-468c-81da-f8bafb87a30c)
-     Endpoint para cualquier trimestre del 2023: ```http://localhost:5076/api/Pet/petsByAppoiment/{id}``` <br><br>
+     Endpoint para cualquier trimestre del 2023: ```http://localhost:5076/api/Pet/petsByAppoiment/{quarter}``` <br><br>
 7. Lista de todas las mascotas agrupadas por especie.
      ```
         http://localhost:5076/api/Pet/petsBySpecies
