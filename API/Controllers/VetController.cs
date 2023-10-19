@@ -28,6 +28,7 @@ public class VetController : ApiBaseController
     //CRUD
     [HttpGet]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Administrator")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -81,19 +82,16 @@ public class VetController : ApiBaseController
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrator")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-
     public async Task<IActionResult> Delete(int id)
     {
         var vet = await _unitOfWork.Veterinarians.GetByIdAsync(id);
-        if(vet == null)
-        {
-            return NotFound();
-        }
-        this._unitOfWork.Veterinarians.Remove(vet);
-        await this._unitOfWork.SaveAsync();
+        if(vet == null){return NotFound();}
+        _unitOfWork.Veterinarians.Remove(vet);
+        await _unitOfWork.SaveAsync();
         return NoContent();
     }
 
@@ -101,7 +99,6 @@ public class VetController : ApiBaseController
     //1. Visualización de los veterinarios cuya especialidad sea Cirugía vascular.
     [HttpGet("veterinariansBySpeciality")]
     [MapToApiVersion("1.0")]
-    //[Authorize(Roles = "Administrator")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult> GetVeterinariansBySpecialty()
@@ -125,7 +122,6 @@ public class VetController : ApiBaseController
     //1.1 Visualización de los veterinarios por especialidad.
     [HttpGet("veterinariansBySpeciality/{id}")]
     [MapToApiVersion("1.0")]
-    //[Authorize(Roles = "Administrator")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -138,7 +134,6 @@ public class VetController : ApiBaseController
     }
     [HttpGet("veterinariansBySpeciality/{id}")]
     [MapToApiVersion("1.1")]
-    //[Authorize(Roles = "Administrator")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 

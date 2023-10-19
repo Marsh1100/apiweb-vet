@@ -40,7 +40,7 @@ public class SpecialityController : ApiBaseController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<Pager<SpecialityDto>>> GetPagination([FromQuery] Params p)
     {
-        var specialities = await _unitOfWork.Providers.GetAllAsync(p.PageIndex, p.PageSize, p.Search);
+        var specialities = await _unitOfWork.Specialities.GetAllAsync(p.PageIndex, p.PageSize, p.Search);
         var specialitiesDto = _mapper.Map<List<SpecialityDto>>(specialities.registros);
         return  new Pager<SpecialityDto>(specialitiesDto,specialities.totalRegistros, p.PageIndex, p.PageSize, p.Search);
     }

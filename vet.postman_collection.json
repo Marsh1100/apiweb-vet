@@ -1,0 +1,1657 @@
+{
+	"info": {
+		"_postman_id": "cf4ac1e6-d692-4b9a-a3a4-9fb09ad31cec",
+		"name": "vet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28473639"
+	},
+	"item": [
+		{
+			"name": "Enpoints",
+			"item": [
+				{
+					"name": "1.VeterinariansBySpecialty{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXJhMTEiLCJqdGkiOiIxZTBkZWVhZi01MzI3LTRmNzAtYWMyNC0zMTg2MDUyOTU0YjgiLCJlbWFpbCI6InNhcmFAZ21haWwuY29tIiwidWlkIjoiMSIsInJvbGVzIjoiQWRtaW5pc3RyYXRvciIsImV4cCI6MTY5NzY3ODQwNywiaXNzIjoiTXlTdG9yZUFwaSIsImF1ZCI6Ik15U3RvcmVBcGlVc2VyIn0.gWuNDX9713ZKPVpdrhporQMdofMz6bK_XGSLKDTcWjE"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Vet/veterinariansBySpeciality/2?ver=1.1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Vet",
+								"veterinariansBySpeciality",
+								"2"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2.MedicinesByLaboratory{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXJhMTEiLCJqdGkiOiJjMmViZDYyNC0wMmFiLTQwMWEtYmVkZi03ZTVhMWYzNWI3NjQiLCJlbWFpbCI6InNhcmFAZ21haWwuY29tIiwidWlkIjoiMSIsInJvbGVzIjoiQWRtaW5pc3RyYXRvciIsImV4cCI6MTY5NzY2NjUxNCwiaXNzIjoiTXlTdG9yZUFwaSIsImF1ZCI6Ik15U3RvcmVBcGlVc2VyIn0.uJ1Emg-O5V_HuGYgO0NzUKWWhj-Y7sj4xE4Ba8OJmoU"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Medicine/medicinesByLaboratory/1?ver=1.1&search=H",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Medicine",
+								"medicinesByLaboratory",
+								"1"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1"
+								},
+								{
+									"key": "search",
+									"value": "H"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.PetBySpecies{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Pet/petBySpecie?ver=1.1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Pet",
+								"petBySpecie"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4.OwnerPets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Owner/ownerPets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Owner",
+								"ownerPets"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5.MedicinePrice{price}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Medicine/medicinesPrice/4200",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Medicine",
+								"medicinesPrice",
+								"4200"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6.PetsByAppoiment{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Pet/petsByAppoiment/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Pet",
+								"petsByAppoiment",
+								"3"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7.PetsBySpecies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Pet/petsBySpecies?ver=1.0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Pet",
+								"petsBySpecies"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8.MovementMedicines",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/MovementMedicine/movementMedicines",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"MovementMedicine",
+								"movementMedicines"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "9.PetsByVeterinarian{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Pet/petsByVeterinarian/2?ver=1.1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Pet",
+								"petsByVeterinarian",
+								"2"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10.ProvidersByMedicine{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:5076/api/Provider/providersByMedicine/5"
+					},
+					"response": []
+				},
+				{
+					"name": "11.OwnerPetsByBreed/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:5076/api/Pet/OwnerPetsByBreed/2"
+					},
+					"response": []
+				},
+				{
+					"name": "12.QuantityPets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Pet/quantityPets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Pet",
+								"quantityPets"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "token",
+			"item": [
+				{
+					"name": "register-user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Email\":  \"vitor@gmail.com\",\r\n  \"Password\":\"123*\",\r\n  \"IdenNumber\": \"666\",\r\n  \"UserName\": \"victor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/User/register"
+					},
+					"response": []
+				},
+				{
+					"name": "token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Username\": \"sara11\",\r\n  \"password\": \"123*\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/User/token"
+					},
+					"response": []
+				},
+				{
+					"name": "add-role",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\":\"tomas44\",\r\n  \"password\": \"123*\",\r\n  \"role\" : \"Employee\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/User/addrole"
+					},
+					"response": []
+				},
+				{
+					"name": "refresh",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/User/refresh-token"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "owner",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Jose\",\r\n    \"Email\": \"jose@gmail.com\",\r\n    \"Phone\": \"3007895841\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Owner"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"josesito@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Owner"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Owner/5"
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Owner?ver=1.1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Owner"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "appoiment",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"PetId\" : 9,\r\n    \"Date\": \"2023-10-22\",\r\n    \"ReasonId\": 1,\r\n    \"Vetid\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Appoiment"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"PetId\" : 9,\r\n    \"Date\": \"2023-10-22\",\r\n    \"ReasonId\": 1,\r\n    \"Vetid\": 5,\r\n    \"Id\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Appoiment"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Appoiment/30"
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Appoiment?ver=1.1&search=Leo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Appoiment"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1"
+								},
+								{
+									"key": "search",
+									"value": "Leo",
+									"description": "Busca por nombre de mascota las citas"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pet",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Lulo\",\r\n    \"OwnerId\": 1,\r\n    \"BreedId\": 1,\r\n    \"Birthdate\": \"2022-09-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Pet"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":16,\r\n    \"Name\" : \"Lulo\",\r\n    \"OwnerId\": 1,\r\n    \"BreedId\": 1,\r\n    \"Birthdate\": \"2022-09-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Pet"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Pet/1"
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Pet?ver=1.1&search=Daisy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Pet"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "pageIndex",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "ver",
+									"value": "1.1"
+								},
+								{
+									"key": "search",
+									"value": "Daisy"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "vet",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Franchesco Musolini\",\r\n    \"Email\": \"fran@gmail.com\",\r\n    \"Phone\": \"3007895841\",\r\n    \"SpecialityId\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Vet"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Franchesco Musolini\",\r\n    \"Email\": \"fran@gmail.com\",\r\n    \"Phone\": \"3007895841\",\r\n    \"SpecialityId\":2,\r\n    \"Id\": 11\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Vet"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXJhMTEiLCJqdGkiOiJlOWEwYTVkYi01MzVkLTQ3YzctODAwZS1iM2FmMzY1YTYwNjkiLCJlbWFpbCI6InNhcmFAZ21haWwuY29tIiwidWlkIjoiMSIsInJvbGVzIjoiQWRtaW5pc3RyYXRvciIsImV4cCI6MTY5NzcwMTI3MywiaXNzIjoiTXlTdG9yZUFwaSIsImF1ZCI6Ik15U3RvcmVBcGlVc2VyIn0.A9K3rtG0B4RjKKoBSQ5jCp7sl0QwwLZeOLirkFRvl70"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Vet/485"
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Vet?ver=1.1&pageSize=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Vet"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reason",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Vacunación borar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Reason"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Crontrol\",\r\n    \"id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Reason"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Reason/4"
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Reason?ver=1.1&search=control",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Reason"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1"
+								},
+								{
+									"key": "search",
+									"value": "control"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "species",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Anfibia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Species"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Anfibia 2\",\r\n    \"id\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Species"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Species/10"
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Species?ver=1.1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Species"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "speciality",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Toros\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Speciality"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Cirugía plástica\",\r\n    \"id\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Speciality"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Speciality/7"
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Speciality?ver=1.1&search=oft",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Speciality"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "oft"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "breed",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"cocodrilo\",\r\n    \"SpeciesId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Breed"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\": \"prueba\",\r\n    \"SpeciesId\": 2,\r\n    \"Id\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Breed"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Reason/4"
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Species?ver=1.1&pageSize=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Species"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1"
+								},
+								{
+									"key": "search",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "laboratory",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Genfar\",\r\n    \"Phone\" : \"Phone\",\r\n    \"Address\" : \"genfarcito@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Laboratory"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Genfar\",\r\n    \"Phone\" : \"3158967477\",\r\n    \"Address\" : \"genfarcito@gmail.com\",\r\n    \"id\" : 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Laboratory"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Laboratory/1"
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Laboratory?ver=1.1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Laboratory"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "medicine",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"borrar\",\r\n    \"Stock\" : \"10\",\r\n    \"Price\" : 4585,\r\n    \"LaboratoryId\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Medicine"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"Name\" : \"borrar a\",\r\n    \"Stock\" : \"10\",\r\n    \"Price\" : 4585,\r\n    \"LaboratoryId\":1,\r\n    \"id\" : 12\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Medicine"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Medicine/12"
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Medicine?ver=1.1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Medicine"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1"
+								},
+								{
+									"key": "search",
+									"value": "MedicamentoA",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "provider",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Hugo Florez\",\r\n    \"Address\": \"Calle 200\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Provider"
+					},
+					"response": []
+				},
+				{
+					"name": "addMedicine",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Medicine\" : \"MedicamentoC\",\r\n    \"ProviderId\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Provider/addMedicine"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Fabio Florez\",\r\n    \"address\": \"Calle 200\",\r\n    \"id\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Provider"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Provider/1"
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/Provider?ver=1.1&search=marta",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"Provider"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1"
+								},
+								{
+									"key": "search",
+									"value": "marta"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "movement-type",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Devolucion\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/MovementType"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Compra\",\r\n    \"id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/MovementType"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"José Gómez\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"phone\": \"3007895841\",\r\n    \"id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/MovementType/3"
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/MovementType?ver=1.1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"MovementType"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1"
+								},
+								{
+									"key": "search",
+									"value": "venta",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "appoiments",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"PetId\": 1,\r\n    \"Date\":\"2023-10-20\",\r\n    \"ReasonId\":1,\r\n    \"VetId\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/Appoiment"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "movement-medicine",
+			"item": [
+				{
+					"name": "get",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5076/api/MovementMedicine?ver=1.1&search=MedicamentoA",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"MovementMedicine"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1"
+								},
+								{
+									"key": "search",
+									"value": "MedicamentoA"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add-Compra",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"MedicineId\": 5,\r\n    \"MovementTypeId\":1,\r\n    \"Date\": \"2023-10-12\",\r\n    \"Quantity\": 8,\r\n    \"UnitPrice\": 5100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/MovementMedicine"
+					},
+					"response": []
+				},
+				{
+					"name": "add-Venta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"MedicineId\": 6,\r\n    \"MovementTypeId\":2,\r\n    \"Date\": \"2023-10-18\",\r\n    \"Quantity\": 8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5076/api/MovementMedicine"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5076/api/User?ver=1.1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5076",
+							"path": [
+								"api",
+								"User"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1"
+								},
+								{
+									"key": "search",
+									"value": "11",
+									"description": "Busqueda por número de documento",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
