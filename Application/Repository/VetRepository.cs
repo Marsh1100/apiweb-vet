@@ -52,4 +52,35 @@ public class VetRepository : GenericRepository<Vet>, IVet
         }
         return null;
     }
+    public async Task<(int totalRegistros, IEnumerable<Vet> registros)> GetVeterinariansBySpecialtyP(int id, int pageIndex, int pageSize, string search)
+    {
+        var query =  _context.Veterinarians
+                        .Where(p=> p.Speciality.Id == id);
+        if(!string.IsNullOrEmpty(search))
+        {
+            query = query.Where(p=>p.Name.ToLower().Contains(search));
+        }
+        var totalRegistros = await query.CountAsync();
+        var registros = await query 
+                            .Skip((pageIndex-1)*pageSize)
+                            .Take(pageSize)
+                            .ToListAsync();
+        return (totalRegistros, registros);
+    }
+    public async Task<(int totalRegistros, IEnumerable<Vet> registros)> GetVeterinariansBySpecialtyP(int pageIndex, int pageSize, string search)
+    {
+
+        var query =  _context.Veterinarians
+                        .Where(p=> p.Speciality.Name == "Cirugía vascular");
+        if(!string.IsNullOrEmpty(search))
+        {
+            query = query.Where(p=>p.Name.ToLower().Contains(search));
+        }
+        var totalRegistros = await query.CountAsync();
+        var registros = await query 
+                            .Skip((pageIndex-1)*pageSize)
+                            .Take(pageSize)
+                            .ToListAsync();
+        return (totalRegistros, registros);
+    }
 }

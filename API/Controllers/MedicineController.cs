@@ -29,13 +29,13 @@ public class MedicineController : ApiBaseController
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-
     public async Task<ActionResult<IEnumerable<MedicineDto>>> Get()
     {
         var medicines = await _unitOfWork.Medicines.GetAllAsync();
         return _mapper.Map<List<MedicineDto>>(medicines);
     }
-     [HttpGet]
+
+    [HttpGet]
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -82,7 +82,6 @@ public class MedicineController : ApiBaseController
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-
     public async Task<IActionResult> Delete(int id)
     {
         var medicine = await _unitOfWork.Medicines.GetByIdAsync(id);
@@ -101,13 +100,23 @@ public class MedicineController : ApiBaseController
     //[Authorize(Roles = "Employee, Administrator")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-
     public async Task<ActionResult> GetMedicinesByLaboratory()
     {
         var medicines =await _unitOfWork.Medicines.GetMedicinesByLaboratory();
         var medicinesDto = _mapper.Map<IEnumerable<MedicineBaseDto>>(medicines);
 
         return Ok(medicinesDto);
+    }
+
+    [HttpGet("medicinesByLaboratory")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<MedicineBaseDto>>> GetPagination2([FromQuery] Params p)
+    {
+        var medicines =await _unitOfWork.Medicines.GetMedicinesByLaboratoryP(p.PageIndex, p.PageSize, p.Search);
+        var medDto = _mapper.Map<List<MedicineBaseDto>>(medicines.registros);
+        return  new Pager<MedicineBaseDto>(medDto,medicines.totalRegistros, p.PageIndex, p.PageSize, p.Search);
     }
 
     //2.2 Lista de los medicamentos que pertenezcan a un laboratorio.
@@ -122,6 +131,17 @@ public class MedicineController : ApiBaseController
         var medicinesDto = _mapper.Map<IEnumerable<MedicineBaseDto>>(medicines);
 
         return Ok(medicinesDto);
+    }
+    [HttpGet("medicinesByLaboratory/{id}")]
+    [MapToApiVersion("1.1")]
+    //[Authorize(Roles = "Employee, Administrator")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async  Task<ActionResult<Pager<MedicineBaseDto>>> GetPagination2(int id,[FromQuery] Params p)
+    {
+        var medicines =await _unitOfWork.Medicines.GetMedicinesByLaboratoryP(id,p.PageIndex, p.PageSize, p.Search);
+         var medDto = _mapper.Map<List<MedicineBaseDto>>(medicines.registros);
+        return  new Pager<MedicineBaseDto>(medDto,medicines.totalRegistros, p.PageIndex, p.PageSize, p.Search);
     }
 
     //5.Lista de los medicamentos que tenga un precio de venta mayor a 50000.

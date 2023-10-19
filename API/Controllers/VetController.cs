@@ -101,7 +101,7 @@ public class VetController : ApiBaseController
     //1. Visualización de los veterinarios cuya especialidad sea Cirugía vascular.
     [HttpGet("veterinariansBySpeciality")]
     [MapToApiVersion("1.0")]
-    [Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Administrator")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -113,10 +113,21 @@ public class VetController : ApiBaseController
         return Ok(veterinariansDto);
     }
 
+    [HttpGet("veterinariansBySpeciality")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<VetSpecialityDto>>> GetPagination2([FromQuery] Params p)
+    {
+        var vets = await _unitOfWork.Veterinarians.GetVeterinariansBySpecialtyP(p.PageIndex, p.PageSize, p.Search);
+        var vetsDto = _mapper.Map<List<VetSpecialityDto>>(vets.registros);
+        return  new Pager<VetSpecialityDto>(vetsDto,vets.totalRegistros, p.PageIndex, p.PageSize, p.Search);
+    }
+
     //1.1 Visualización de los veterinarios por especialidad.
     [HttpGet("veterinariansBySpeciality/{id}")]
     [MapToApiVersion("1.0")]
-    [Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Administrator")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -126,5 +137,17 @@ public class VetController : ApiBaseController
         var veterinariansDto = _mapper.Map<IEnumerable<VetSpecialityDto>>(veterinarians);
 
         return Ok(veterinariansDto);
+    }
+    [HttpGet("veterinariansBySpeciality/{id}")]
+    [MapToApiVersion("1.1")]
+    //[Authorize(Roles = "Administrator")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<Pager<VetSpecialityDto>>> GetPagination3(int id,[FromQuery] Params p)
+    {
+        var vets =await _unitOfWork.Veterinarians.GetVeterinariansBySpecialtyP(id,p.PageIndex, p.PageSize, p.Search);
+        var vetsDto = _mapper.Map<List<VetSpecialityDto>>(vets.registros);
+        return  new Pager<VetSpecialityDto>(vetsDto,vets.totalRegistros, p.PageIndex, p.PageSize, p.Search);
     }
 }
