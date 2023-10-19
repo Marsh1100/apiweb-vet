@@ -46,6 +46,7 @@ public class PetRepository : GenericRepository<Pet>, IPet
     public async Task<IEnumerable<Pet>> GetPetBySpecie(int id)
     {
         var pets =await _context.Pets
+                            .Include(p=>p.Breed).ThenInclude(p=>p.Species)
                             .Include(p=>p.Owner)
                             .Where(a=> a.Breed.Species.Id == id)
                             .ToListAsync();
@@ -55,6 +56,7 @@ public class PetRepository : GenericRepository<Pet>, IPet
     public async Task<(int totalRegistros, IEnumerable<Pet> registros)> GetPetBySpecieP(int id, int pageIndex, int pageSize, string search)
     {   
         var query = _context.Pets
+                            .Include(p=>p.Breed).ThenInclude(p=>p.Species)
                             .Include(p=>p.Owner)
                             .Where(a=> a.Breed.Species.Id == id);
         return await Paginacion(query,pageIndex, pageSize, search);
