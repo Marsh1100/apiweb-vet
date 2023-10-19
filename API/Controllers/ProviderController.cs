@@ -116,12 +116,22 @@ public class ProviderController : ApiBaseController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<Provider>> GetProvidersByMedicine(int id)
+    public async Task<ActionResult<ProviderDto>> GetProvidersByMedicine(int id)
     {
         var provider =await _unitOfWork.Providers.GetProvidersByMedicine(id);
         var providerDto = _mapper.Map<IEnumerable<ProviderDto>>(provider);
 
         return Ok(providerDto);
+    }
+    [HttpGet("providersByMedicine/{id}")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<ProviderDto>>> GetPagination(int id,[FromQuery] Params p)
+    {
+        var provider = await _unitOfWork.Providers.GetProvidersByMedicineP(id,p.PageIndex, p.PageSize, p.Search);
+        var providerDto = _mapper.Map<List<ProviderDto>>(provider.registros);
+        return  new Pager<ProviderDto>(providerDto,provider.totalRegistros, p.PageIndex, p.PageSize, p.Search);
     }
 
 }

@@ -17,16 +17,8 @@ public class PetRepository : GenericRepository<Pet>, IPet
     public override async Task<(int totalRegistros, IEnumerable<Pet> registros)> GetAllAsync(int pageIndex, int pageSize, string search)
     {
         var query = _context.Pets.Include(p=>p.Owner).Include(p=>p.Breed) as IQueryable<Pet>;
-        if(!string.IsNullOrEmpty(search))
-        {
-            query = query.Where(p=>p.Name.ToLower().Contains(search));
-        }
-        var totalRegistros = await query.CountAsync();
-        var registros = await query 
-                            .Skip((pageIndex-1)*pageSize)
-                            .Take(pageSize)
-                            .ToListAsync();
-        return (totalRegistros, registros);
+        return await Paginacion(query,pageIndex, pageSize, search);
+
     }
     public async Task<string> RegisterAsync(Pet modelPet)
     {
@@ -53,31 +45,34 @@ public class PetRepository : GenericRepository<Pet>, IPet
     }
     public async Task<IEnumerable<Pet>> GetPetBySpecie(int id)
     {
-        var pets =await _context.Pets.Include(p=>p.Owner).ToListAsync();
-        var breeds = await _context.Breeds.ToListAsync();
-        var speciesP = await _context.SpeciesP.ToListAsync();
+        var pets =await _context.Pets
+                            .Include(p=>p.Owner)
+                            .Where(a=> a.Breed.Species.Id == id)
+                            .ToListAsync();
         
-        var petsBreed = from pet in pets
-                        join breed in breeds on pet.BreedId equals breed.Id
-                        join species in speciesP on breed.SpeciesId equals species.Id
-                        where species.Id == id
-                        select pet;
-        return petsBreed;
+        return pets;
     }
+    public async Task<(int totalRegistros, IEnumerable<Pet> registros)> GetPetBySpecieP(int id, int pageIndex, int pageSize, string search)
+    {   
+        var query = _context.Pets
+                            .Include(p=>p.Owner)
+                            .Where(a=> a.Breed.Species.Id == id);
+        return await Paginacion(query,pageIndex, pageSize, search);
+    }
+    
     public async Task<IEnumerable<Pet>> GetPetBySpecie()
     {
-        var pets =await _context.Pets.Include(p=>p.Owner).ToListAsync();
-        var breeds = await _context.Breeds.ToListAsync();
-        var speciesP = await _context.SpeciesP.ToListAsync();
-        
-        var petsBreed = from pet in pets
-                        join breed in breeds on pet.BreedId equals breed.Id
-                        join species in speciesP on breed.SpeciesId equals species.Id
-                        where species.Name.ToLower() == "felina"
-                        select pet;
-        return petsBreed;
+        var pets =await _context.Pets.Include(p=>p.Owner).Include(p=>p.Breed)
+                        .Where(a=> a.Breed.Species.Name == "felina").ToListAsync();
+     
+        return pets;
     }
-
+    public async Task<(int totalRegistros, IEnumerable<Pet> registros)> GetPetBySpecieP(int pageIndex, int pageSize, string search)
+    {   
+        var query = _context.Pets.Include(p=>p.Owner).Include(p=>p.Breed)
+                        .Where(a=> a.Breed.Species.Name == "felina");
+        return await Paginacion(query,pageIndex, pageSize, search);
+    }
     public async Task<IEnumerable<object>> GetPetsBySpecie()
     {
         var pets =await _context.Pets.ToListAsync();
@@ -104,29 +99,35 @@ public class PetRepository : GenericRepository<Pet>, IPet
     }
     public async Task<IEnumerable<Pet>> GetOwnerPetsByBreed(int id)
     {
-        var pets =await _context.Pets.ToListAsync();
-        var breeds = await _context.Breeds.ToListAsync();
-        var speciesP = await _context.SpeciesP.ToListAsync();
-        
-        var petResult = from pet in pets
-                        join breed in breeds on pet.BreedId equals breed.Id
-                        where breed.Id == id
-                        select pet;
-        return petResult;
+        var pets =await _context.Pets
+                            .Include(p=>p.Breed).ThenInclude(p=> p.Species)
+                            .Where(p=> p.Breed.Id == id)
+                            .ToListAsync();
+        return pets;
+    }
+
+    public async Task<(int totalRegistros, IEnumerable<Pet> registros)> GetOwnerPetsByBreedP(int id, int pageIndex, int pageSize, string search)
+    {  
+        var query = _context.Pets
+                            .Include(p=>p.Breed).ThenInclude(p=> p.Species)
+                            .Where(p=> p.Breed.Id == id);
+        return await Paginacion(query,pageIndex, pageSize, search);
     }
     public async Task<IEnumerable<Pet>> GetOwnerPetsByBreed()
     {
-        var pets =await _context.Pets.ToListAsync();
-        var breeds = await _context.Breeds.ToListAsync();
-        var speciesP = await _context.SpeciesP.ToListAsync();
-        
-        var petResult = from pet in pets
-                        join breed in breeds on pet.BreedId equals breed.Id
-                        where breed.Name == "Golden Retriver"
-                        select pet;
-        return petResult;
+        var pets =await _context.Pets
+                            .Include(p=>p.Breed).ThenInclude(p=> p.Species)
+                            .Where(p=> p.Breed.Name == "Golden Retriver")
+                            .ToListAsync();
+        return pets;
     }
-
+    public async Task<(int totalRegistros, IEnumerable<Pet> registros)> GetOwnerPetsByBreedP(int pageIndex, int pageSize, string search)
+    { 
+        var query = _context.Pets
+                            .Include(p=>p.Breed).ThenInclude(p=> p.Species)
+                            .Where(p=> p.Breed.Name == "Golden Retriver");
+        return await Paginacion(query,pageIndex, pageSize, search);
+    }
     public async Task<IEnumerable<object>> GetQuantityPets()
     {
         var pets =await _context.Pets.ToListAsync();
@@ -168,49 +169,102 @@ public class PetRepository : GenericRepository<Pet>, IPet
         DateTime dateStart = new(2023, init, 1);
         DateTime dateEnd = dateStart.AddMonths(3);
 
-        var pets = await _context.Pets
-                    .Include(p=> p.Appoiments)
-                    .Include(p=> p.Breed)
+        var petsAppoiment = await _context.Appoiments
+                    .Include(p=>p.Reason)
+                    .Include(p=> p.Pet).ThenInclude(p =>p.Breed)
+                    .Where(a=> a.Date>= dateStart && a.Date<= dateEnd && a.Reason.Name == "Vacunación")
                     .ToListAsync();
-        var appoiments = await _context.Appoiments.ToListAsync();
-
-        var petsAppoiment = from appoiment in appoiments
-                            join pet in pets on appoiment.PetId equals pet.Id
-                            where appoiment.Date>=dateStart && appoiment.Date<=dateEnd
-                            select appoiment;
+        
         return petsAppoiment;
+    }
+    public async Task<(int totalRegistros, IEnumerable<Appoiment> registros)> GetPetsByAppoimentP(int quarter, int pageIndex, int pageSize, string search)
+    {
+        int init = 1;
+        switch (quarter)
+        {
+            case 1: init = 1; break;
+            case 2: init = 4; break;
+            case 3: init = 7; break;
+            case 4: init = 10; break;
+            default:
+                break;
+        }
+        DateTime dateStart = new(2023, init, 1);
+        DateTime dateEnd = dateStart.AddMonths(3);
 
+        var query = _context.Appoiments
+                    .Include(p=>p.Reason)
+                    .Include(p=> p.Pet).ThenInclude(p =>p.Breed)
+                    .Where(a=> a.Date>= dateStart && a.Date<= dateEnd && a.Reason.Name == "Vacunación");
+        return await Paginacion(query,pageIndex, pageSize, search);
     }
     public async Task<IEnumerable<Appoiment>> GetPetsByAppoiment()
     {
         DateTime dateStart = new(2023, 1, 1);
         DateTime dateEnd = dateStart.AddMonths(3);
 
-        var pets = await _context.Pets
-                    .Include(p=> p.Appoiments)
-                    .Include(p=> p.Breed)
+        var petsAppoiment = await _context.Appoiments
+                    .Include(p=> p.Pet).ThenInclude(p =>p.Breed)
+                    .Where(a=> a.Date>= dateStart && a.Date<= dateEnd  && a.Reason.Name == "Vacunación")
                     .ToListAsync();
-        var appoiments = await _context.Appoiments.ToListAsync();
-
-        var petsAppoiment = from appoiment in appoiments
-                            join pet in pets on appoiment.PetId equals pet.Id
-                            where appoiment.Date>=dateStart && appoiment.Date<=dateEnd
-                            select appoiment;
+    
         return petsAppoiment;
+    }
+    public async Task<(int totalRegistros, IEnumerable<Appoiment> registros)> GetPetsByAppoimentP(int pageIndex, int pageSize, string search)
+    {
+        DateTime dateStart = new(2023, 1, 1);
+        DateTime dateEnd = dateStart.AddMonths(3);
+
+        var query =  _context.Appoiments
+                    .Include(p=> p.Pet).ThenInclude(p =>p.Breed)
+                    .Where(a=> a.Date>= dateStart && a.Date<= dateEnd);
+        
+        return await Paginacion(query,pageIndex, pageSize, search);
     }
 
     public async Task<IEnumerable<Appoiment>> GetPetsByVeterinarian(int id)
     {
-        var pets = await _context.Pets
-                    .Include(p=> p.Appoiments)
-                    .Include(p=> p.Breed)
+        var petsAppoiment = await _context.Appoiments
+                    .Include(p=> p.Pet).ThenInclude(p=>p.Breed)
+                    .Where(p=> p.VetId == id)
                     .ToListAsync();
-        var appoiments = await _context.Appoiments.ToListAsync();
-
-        var petsAppoiment = from appoiment in appoiments
-                            join pet in pets on appoiment.PetId equals pet.Id
-                            where appoiment.VetId == id
-                            select appoiment;
         return petsAppoiment;
     }
+    public async Task<(int totalRegistros, IEnumerable<Appoiment> registros)> GetPetsByVeterinarianP(int id, int pageIndex, int pageSize, string search)
+    {
+        var query =  _context.Appoiments
+                    .Include(p=> p.Pet).ThenInclude(p=>p.Breed)
+                    .Where(p=> p.VetId == id);
+        
+        return await Paginacion(query,pageIndex, pageSize, search);
+    }
+
+    private static async Task<(int totalRegistros, IEnumerable<Pet> registros)> Paginacion(IQueryable<Pet> query,int pageIndex, int pageSize, string search)
+    {
+        if(!string.IsNullOrEmpty(search))
+        {
+            query = query.Where(p=>p.Name.ToLower().Contains(search));
+        }
+        var totalRegistros = await query.CountAsync();
+        var registros = await query 
+                            .Skip((pageIndex-1)*pageSize)
+                            .Take(pageSize)
+                            .ToListAsync();
+        return (totalRegistros, registros);
+    }
+    private static async Task<(int totalRegistros, IEnumerable<Appoiment> registros)> Paginacion(IQueryable<Appoiment> query,int pageIndex, int pageSize, string search)
+    {
+        if(!string.IsNullOrEmpty(search))
+        {
+            query = query.Where(p=>p.Pet.Name.ToLower().Contains(search));
+        }
+        var totalRegistros = await query.CountAsync();
+        var registros = await query 
+                            .Skip((pageIndex-1)*pageSize)
+                            .Take(pageSize)
+                            .ToListAsync();
+        return (totalRegistros, registros);
+    }
+
+   
 }

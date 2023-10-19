@@ -16,16 +16,8 @@ public class VetRepository : GenericRepository<Vet>, IVet
     public override async Task<(int totalRegistros, IEnumerable<Vet> registros)> GetAllAsync(int pageIndex, int pageSize, string search)
     {
         var query = _context.Veterinarians.Include(p=>p.Speciality) as IQueryable<Vet>;
-        if(!string.IsNullOrEmpty(search))
-        {
-            query = query.Where(p=>p.Name.ToLower().Contains(search));
-        }
-        var totalRegistros = await query.CountAsync();
-        var registros = await query 
-                            .Skip((pageIndex-1)*pageSize)
-                            .Take(pageSize)
-                            .ToListAsync();
-        return (totalRegistros, registros);
+        return await Paginacion(query,pageIndex, pageSize, search);
+
     }
 
     public async Task<IEnumerable<Vet>> GetVeterinariansBySpecialty(int id)
@@ -56,22 +48,20 @@ public class VetRepository : GenericRepository<Vet>, IVet
     {
         var query =  _context.Veterinarians
                         .Where(p=> p.Speciality.Id == id);
-        if(!string.IsNullOrEmpty(search))
-        {
-            query = query.Where(p=>p.Name.ToLower().Contains(search));
-        }
-        var totalRegistros = await query.CountAsync();
-        var registros = await query 
-                            .Skip((pageIndex-1)*pageSize)
-                            .Take(pageSize)
-                            .ToListAsync();
-        return (totalRegistros, registros);
+        return await Paginacion(query,pageIndex, pageSize, search);
+
     }
     public async Task<(int totalRegistros, IEnumerable<Vet> registros)> GetVeterinariansBySpecialtyP(int pageIndex, int pageSize, string search)
     {
 
         var query =  _context.Veterinarians
                         .Where(p=> p.Speciality.Name == "Cirugía vascular");
+       
+        return await Paginacion(query,pageIndex, pageSize, search);
+    }
+
+    private static async Task<(int totalRegistros, IEnumerable<Vet> registros)> Paginacion(IQueryable<Vet> query,int pageIndex, int pageSize, string search)
+    {
         if(!string.IsNullOrEmpty(search))
         {
             query = query.Where(p=>p.Name.ToLower().Contains(search));
@@ -83,4 +73,5 @@ public class VetRepository : GenericRepository<Vet>, IVet
                             .ToListAsync();
         return (totalRegistros, registros);
     }
+    
 }

@@ -157,6 +157,16 @@ public class MedicineController : ApiBaseController
 
         return Ok(medicineDto);
     }
+    [HttpGet("medicinesPrice")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<MedicinePriceDto>>> GetPagination3([FromQuery] Params p)
+    {
+        var medicines = await _unitOfWork.Medicines.GetMedicinesPriceP(p.PageIndex, p.PageSize, p.Search);
+        var medDto = _mapper.Map<List<MedicinePriceDto>>(medicines.registros);
+        return  new Pager<MedicinePriceDto>(medDto,medicines.totalRegistros, p.PageIndex, p.PageSize, p.Search);
+    }
 
     //5.1 Lista de los medicamentos que tenga un precio de venta mayor a x precio.
     [HttpGet("medicinesPrice/{price}")]
@@ -170,5 +180,16 @@ public class MedicineController : ApiBaseController
         var medicineDto = _mapper.Map<IEnumerable<MedicinePriceDto>>(medicine);
 
         return Ok(medicineDto);
+    }
+
+    [HttpGet("medicinesPrice/{price}")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<MedicinePriceDto>>> GetPagination4(double price,[FromQuery] Params p)
+    {
+        var medicines = await _unitOfWork.Medicines.GetMedicinesPriceP(price,p.PageIndex, p.PageSize, p.Search);
+        var medDto = _mapper.Map<List<MedicinePriceDto>>(medicines.registros);
+        return  new Pager<MedicinePriceDto>(medDto,medicines.totalRegistros, p.PageIndex, p.PageSize, p.Search);
     }
 }

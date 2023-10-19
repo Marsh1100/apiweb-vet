@@ -9,4 +9,6 @@ namespace Domain.Interfaces;
 public interface IOwner : IGenericRepository<Owner> 
 {
     Task<IEnumerable<Owner>> GetOwnerPets();
+    Task<(int totalRegistros, IEnumerable<Owner> registros)> GetOwnerPetsP(int pageIndex, int pageSize, string search);
+
 }

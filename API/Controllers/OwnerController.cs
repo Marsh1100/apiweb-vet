@@ -108,5 +108,15 @@ public class OwnerController : ApiBaseController
 
         return Ok(petsDto);
     }
+    [HttpGet("ownerPets")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<OwnerPetsDto>>> GetPagination2([FromQuery] Params p)
+    {
+        var owners = await _unitOfWork.Owners.GetOwnerPetsP(p.PageIndex, p.PageSize, p.Search);
+        var ownersDto = _mapper.Map<List<OwnerPetsDto>>(owners.registros);
+        return  new Pager<OwnerPetsDto>(ownersDto,owners.totalRegistros, p.PageIndex, p.PageSize, p.Search);
+    }
 
 }

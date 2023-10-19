@@ -104,12 +104,10 @@ public class VetController : ApiBaseController
     //[Authorize(Roles = "Administrator")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-
     public async Task<ActionResult> GetVeterinariansBySpecialty()
     {
         var veterinarians =await _unitOfWork.Veterinarians.GetVeterinariansBySpecialty();
         var veterinariansDto = _mapper.Map<IEnumerable<VetSpecialityDto>>(veterinarians);
-
         return Ok(veterinariansDto);
     }
 
