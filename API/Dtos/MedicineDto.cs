@@ -10,6 +10,8 @@ public class MedicineBaseDto
     public int Id { get; set; }
     [Required]
     public string Name { get; set; }
+    public string Laboratory { get; set; }
+
     [Required]
     public int Stock { get; set; }
     [Required]
@@ -20,9 +22,5 @@ public class MedicineDto : MedicineBaseDto
 {
     [Required]
     public int LaboratoryId { get; set; }
-}
-public class MedicinePriceDto : MedicineBaseDto
-{
-    public string Laboratory { get; set; }
 }
 

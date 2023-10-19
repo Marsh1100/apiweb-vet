@@ -24,6 +24,7 @@ public class VetRepository : GenericRepository<Vet>, IVet
     {
 
         var vet = await _context.Veterinarians
+                        .Include(p=>p.Speciality)
                         .Where(p=> p.SpecialityId == id)
                         .ToListAsync();
         if (vet.Any())
@@ -36,6 +37,7 @@ public class VetRepository : GenericRepository<Vet>, IVet
     {
 
         var vet = await _context.Veterinarians
+                        .Include(p=>p.Speciality)
                         .Where(p=> p.Speciality.Name == "Cirugía vascular")
                         .ToListAsync();
         if (vet.Any())
@@ -47,6 +49,7 @@ public class VetRepository : GenericRepository<Vet>, IVet
     public async Task<(int totalRegistros, IEnumerable<Vet> registros)> GetVeterinariansBySpecialtyP(int id, int pageIndex, int pageSize, string search)
     {
         var query =  _context.Veterinarians
+                        .Include(p=>p.Speciality)
                         .Where(p=> p.Speciality.Id == id);
         return await Paginacion(query,pageIndex, pageSize, search);
 
@@ -55,6 +58,7 @@ public class VetRepository : GenericRepository<Vet>, IVet
     {
 
         var query =  _context.Veterinarians
+                        .Include(p=>p.Speciality)
                         .Where(p=> p.Speciality.Name == "Cirugía vascular");
        
         return await Paginacion(query,pageIndex, pageSize, search);

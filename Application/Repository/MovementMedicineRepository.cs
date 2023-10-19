@@ -41,7 +41,8 @@ public class MovementMedicineRepository : GenericRepository<MovementMedicine>, I
                                             medicine = s.Medicine.Name,
                                             s.Date,
                                             s.Quantity,
-                                            s.UnitPrice
+                                            s.UnitPrice,
+                                            Total = s.Price
                                          })
                     })
                     .ToListAsync();

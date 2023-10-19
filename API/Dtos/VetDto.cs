@@ -26,6 +26,8 @@ public class VetSpecialityDto
     public string Name { get; set; }
     [Required]
     public string Email { get; set; }
+    public string Speciality { get; set; }
+
     [Required]
     public string Phone { get; set; } 
 

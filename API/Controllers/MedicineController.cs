@@ -153,7 +153,7 @@ public class MedicineController : ApiBaseController
     public async Task<ActionResult> GetMedicinesPrice()
     {
         var medicine =await _unitOfWork.Medicines.GetMedicinesPrice();
-        var medicineDto = _mapper.Map<IEnumerable<MedicinePriceDto>>(medicine);
+        var medicineDto = _mapper.Map<IEnumerable<MedicineBaseDto>>(medicine);
 
         return Ok(medicineDto);
     }
@@ -161,11 +161,11 @@ public class MedicineController : ApiBaseController
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Pager<MedicinePriceDto>>> GetPagination3([FromQuery] Params p)
+    public async Task<ActionResult<Pager<MedicineBaseDto>>> GetPagination3([FromQuery] Params p)
     {
         var medicines = await _unitOfWork.Medicines.GetMedicinesPriceP(p.PageIndex, p.PageSize, p.Search);
-        var medDto = _mapper.Map<List<MedicinePriceDto>>(medicines.registros);
-        return  new Pager<MedicinePriceDto>(medDto,medicines.totalRegistros, p.PageIndex, p.PageSize, p.Search);
+        var medDto = _mapper.Map<List<MedicineBaseDto>>(medicines.registros);
+        return  new Pager<MedicineBaseDto>(medDto,medicines.totalRegistros, p.PageIndex, p.PageSize, p.Search);
     }
 
     //5.1 Lista de los medicamentos que tenga un precio de venta mayor a x precio.
@@ -177,7 +177,7 @@ public class MedicineController : ApiBaseController
     public async Task<ActionResult> GetMedicinesPrice(double price)
     {
         var medicine =await _unitOfWork.Medicines.GetMedicinesPrice(price);
-        var medicineDto = _mapper.Map<IEnumerable<MedicinePriceDto>>(medicine);
+        var medicineDto = _mapper.Map<IEnumerable<MedicineBaseDto>>(medicine);
 
         return Ok(medicineDto);
     }
@@ -186,10 +186,10 @@ public class MedicineController : ApiBaseController
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Pager<MedicinePriceDto>>> GetPagination4(double price,[FromQuery] Params p)
+    public async Task<ActionResult<Pager<MedicineBaseDto>>> GetPagination4(double price,[FromQuery] Params p)
     {
         var medicines = await _unitOfWork.Medicines.GetMedicinesPriceP(price,p.PageIndex, p.PageSize, p.Search);
-        var medDto = _mapper.Map<List<MedicinePriceDto>>(medicines.registros);
-        return  new Pager<MedicinePriceDto>(medDto,medicines.totalRegistros, p.PageIndex, p.PageSize, p.Search);
+        var medDto = _mapper.Map<List<MedicineBaseDto>>(medicines.registros);
+        return  new Pager<MedicineBaseDto>(medDto,medicines.totalRegistros, p.PageIndex, p.PageSize, p.Search);
     }
 }

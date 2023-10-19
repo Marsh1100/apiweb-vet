@@ -16,7 +16,7 @@ public class PetRepository : GenericRepository<Pet>, IPet
     }
     public override async Task<(int totalRegistros, IEnumerable<Pet> registros)> GetAllAsync(int pageIndex, int pageSize, string search)
     {
-        var query = _context.Pets.Include(p=>p.Owner).Include(p=>p.Breed) as IQueryable<Pet>;
+        var query = _context.Pets.Include(p=>p.Owner).Include(p=>p.Breed).ThenInclude(p=>p.Species) as IQueryable<Pet>;
         return await Paginacion(query,pageIndex, pageSize, search);
 
     }
@@ -62,14 +62,14 @@ public class PetRepository : GenericRepository<Pet>, IPet
     
     public async Task<IEnumerable<Pet>> GetPetBySpecie()
     {
-        var pets =await _context.Pets.Include(p=>p.Owner).Include(p=>p.Breed)
+        var pets =await _context.Pets.Include(p=>p.Owner).Include(p=>p.Breed).ThenInclude(p=>p.Species)
                         .Where(a=> a.Breed.Species.Name == "felina").ToListAsync();
      
         return pets;
     }
     public async Task<(int totalRegistros, IEnumerable<Pet> registros)> GetPetBySpecieP(int pageIndex, int pageSize, string search)
     {   
-        var query = _context.Pets.Include(p=>p.Owner).Include(p=>p.Breed)
+        var query = _context.Pets.Include(p=>p.Owner).Include(p=>p.Breed).ThenInclude(p=>p.Species)
                         .Where(a=> a.Breed.Species.Name == "felina");
         return await Paginacion(query,pageIndex, pageSize, search);
     }
@@ -170,7 +170,7 @@ public class PetRepository : GenericRepository<Pet>, IPet
         DateTime dateEnd = dateStart.AddMonths(3);
 
         var petsAppoiment = await _context.Appoiments
-                    .Include(p=>p.Reason)
+                    .Include(p=>p.Reason).Include(p=>p.Vet)
                     .Include(p=> p.Pet).ThenInclude(p =>p.Breed)
                     .Where(a=> a.Date>= dateStart && a.Date<= dateEnd && a.Reason.Name == "Vacunación")
                     .ToListAsync();
@@ -193,7 +193,7 @@ public class PetRepository : GenericRepository<Pet>, IPet
         DateTime dateEnd = dateStart.AddMonths(3);
 
         var query = _context.Appoiments
-                    .Include(p=>p.Reason)
+                    .Include(p=>p.Reason).Include(p=>p.Vet)
                     .Include(p=> p.Pet).ThenInclude(p =>p.Breed)
                     .Where(a=> a.Date>= dateStart && a.Date<= dateEnd && a.Reason.Name == "Vacunación");
         return await Paginacion(query,pageIndex, pageSize, search);
@@ -204,6 +204,7 @@ public class PetRepository : GenericRepository<Pet>, IPet
         DateTime dateEnd = dateStart.AddMonths(3);
 
         var petsAppoiment = await _context.Appoiments
+                    .Include(p=>p.Reason).Include(p=>p.Vet)
                     .Include(p=> p.Pet).ThenInclude(p =>p.Breed)
                     .Where(a=> a.Date>= dateStart && a.Date<= dateEnd  && a.Reason.Name == "Vacunación")
                     .ToListAsync();
@@ -216,6 +217,7 @@ public class PetRepository : GenericRepository<Pet>, IPet
         DateTime dateEnd = dateStart.AddMonths(3);
 
         var query =  _context.Appoiments
+                    .Include(p=>p.Reason).Include(p=>p.Vet)
                     .Include(p=> p.Pet).ThenInclude(p =>p.Breed)
                     .Where(a=> a.Date>= dateStart && a.Date<= dateEnd);
         
@@ -225,6 +227,7 @@ public class PetRepository : GenericRepository<Pet>, IPet
     public async Task<IEnumerable<Appoiment>> GetPetsByVeterinarian(int id)
     {
         var petsAppoiment = await _context.Appoiments
+                    .Include(p=>p.Reason).Include(p=>p.Vet)
                     .Include(p=> p.Pet).ThenInclude(p=>p.Breed)
                     .Where(p=> p.VetId == id)
                     .ToListAsync();
@@ -232,7 +235,7 @@ public class PetRepository : GenericRepository<Pet>, IPet
     }
     public async Task<(int totalRegistros, IEnumerable<Appoiment> registros)> GetPetsByVeterinarianP(int id, int pageIndex, int pageSize, string search)
     {
-        var query =  _context.Appoiments
+        var query =  _context.Appoiments.Include(p=>p.Reason).Include(p=>p.Vet)
                     .Include(p=> p.Pet).ThenInclude(p=>p.Breed)
                     .Where(p=> p.VetId == id);
         

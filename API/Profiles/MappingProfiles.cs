@@ -45,29 +45,33 @@ public class MappingProfiles : Profile
             .ReverseMap();
 
         CreateMap<Vet, VetSpecialityDto>()
+            .ForMember(dest=> dest.Speciality, origen=>  origen.MapFrom(origen => origen.Speciality.Name))
             .ReverseMap();
         CreateMap<Medicine, MedicineBaseDto>()
+            .ForMember(dest => dest.Laboratory, origen=> origen.MapFrom(origen => origen.Laboratory.Name))
             .ReverseMap();
 
         CreateMap<Pet, PetsOnlyDto>()
             .ForMember(dest => dest.Breed, origen=> origen.MapFrom(origen => origen.Breed.Name))
+            .ForMember(dest => dest.Species, origen=> origen.MapFrom(origen => origen.Breed.Species.Name))
             .ForMember(dest => dest.Owner, origen=> origen.MapFrom(origen => origen.Owner.Name))
             .ReverseMap();
         CreateMap<Owner, OwnerPetsDto>()
             .ForMember(dest => dest.Pets, origen=> origen.MapFrom(origen => origen.Pets))
             .ReverseMap();
-        CreateMap<Medicine, MedicinePriceDto>()
-            .ForMember(dest => dest.Laboratory, origen=> origen.MapFrom(origen => origen.Laboratory.Name))
-            .ReverseMap();
+        
         CreateMap<Pet, PetsOwnerDto>()
             .ForMember(dest => dest.Breed, origen=> origen.MapFrom(origen => origen.Breed.Name))
             .ForMember(dest => dest.Species, origen=> origen.MapFrom(origen => origen.Breed.Species.Name))
             .ReverseMap();
         CreateMap<Appoiment, PetsAppoimentDto>()
             .ForMember(dest => dest.Id, origen=> origen.MapFrom(origen => origen.Pet.Id))
+            .ForMember(dest => dest.Veterinarian, origen=> origen.MapFrom(origen => origen.Vet.Name))
             .ForMember(dest => dest.Name, origen=> origen.MapFrom(origen => origen.Pet.Name))
             .ForMember(dest => dest.Breed, origen=> origen.MapFrom(origen => origen.Pet.Breed.Name))
             .ForMember(dest => dest.Birthdate, origen=> origen.MapFrom(origen => origen.Pet.Birthdate))
+            .ForMember(dest => dest.Reason, origen=> origen.MapFrom(origen => origen.Reason.Name))
+
             .ForMember(dest => dest.DateAppoiment, origen=> origen.MapFrom(origen => origen.Date))
             .ReverseMap();
         

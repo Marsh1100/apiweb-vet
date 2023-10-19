@@ -32,5 +32,6 @@ public class MovementMedicineAllDto
     [Required]
     public int Quantity { get; set; }
     public double UnitPrice { get; set; }
+    public double Price { get; set; }
 
 }

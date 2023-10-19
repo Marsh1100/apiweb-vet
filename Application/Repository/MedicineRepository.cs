@@ -21,7 +21,7 @@ public class MedicineRepository : GenericRepository<Medicine>, IMedicine
     }
     public async Task<IEnumerable<Medicine>> GetMedicinesByLaboratory(int id)
     {
-        var medicines = await _context.Medicines.Where(p=> p.LaboratoryId == id).ToListAsync();
+        var medicines = await _context.Medicines.Include(p=>p.Laboratory).Where(p=> p.LaboratoryId == id).ToListAsync();
         if(medicines.Any())
         {
             return medicines;
@@ -30,13 +30,15 @@ public class MedicineRepository : GenericRepository<Medicine>, IMedicine
     }
     public async Task<(int totalRegistros, IEnumerable<Medicine> registros)> GetMedicinesByLaboratoryP(int id, int pageIndex, int pageSize, string search)
     {
-        var query =  _context.Medicines.Where(p=> p.LaboratoryId == id);
+        var query =  _context.Medicines
+                    .Include(p=>p.Laboratory)
+                    .Where(p=> p.LaboratoryId == id);
         return await Paginacion(query,pageIndex, pageSize, search);
 
     }
     public async Task<IEnumerable<Medicine>> GetMedicinesByLaboratory()
     {
-        var medicines = await _context.Medicines.Where(p=> p.Laboratory.Name == "Genfar").ToListAsync();
+        var medicines = await _context.Medicines.Include(p=>p.Laboratory).Where(p=> p.Laboratory.Name == "Genfar").ToListAsync();
         if(medicines.Any())
         {
             return medicines;
@@ -46,7 +48,7 @@ public class MedicineRepository : GenericRepository<Medicine>, IMedicine
 
     public async Task<(int totalRegistros, IEnumerable<Medicine> registros)> GetMedicinesByLaboratoryP(int pageIndex, int pageSize, string search)
     {
-        var query = _context.Medicines.Where(p=> p.Laboratory.Name == "Genfar");
+        var query = _context.Medicines.Include(p=>p.Laboratory).Where(p=> p.Laboratory.Name == "Genfar");
         return await Paginacion(query,pageIndex, pageSize, search);
 
     }
@@ -62,16 +64,16 @@ public class MedicineRepository : GenericRepository<Medicine>, IMedicine
     public async Task<(int totalRegistros, IEnumerable<Medicine> registros)> GetMedicinesPriceP(double price, int pageIndex, int pageSize, string search)
     {
         var query  =  _context.Medicines
-                        .Where(p=> p.Price >= price)
-                        .Include(p=>p.Laboratory);
+                        .Include(p=>p.Laboratory)
+                        .Where(p=> p.Price >= price);
         return await Paginacion(query,pageIndex, pageSize, search);
     }
     
     public async Task<IEnumerable<Medicine>> GetMedicinesPrice()
     {
         var medicines  = await _context.Medicines
-                        .Where(p=> p.Price >= 50000)
                         .Include(p=>p.Laboratory)
+                        .Where(p=> p.Price >= 50000)
                         .ToListAsync();
         return medicines;
     }
